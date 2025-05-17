@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
+Route::post('/locale', function (Request $request) {
+    session(['locale' => $request->locale]);
+    return back();
+})->name('set-locale');
+
 Route::get('/', function () {
     return 'Welcome to dcpic.eu!';
 });
