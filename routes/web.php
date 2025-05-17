@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    return 'Welcome to dcpics.eu!';
+    return 'Welcome to dcpic.eu!';
 });
 
 Route::get('/auth/redirect', [AuthController::class, 'redirectToDiscord'])->name('login');
