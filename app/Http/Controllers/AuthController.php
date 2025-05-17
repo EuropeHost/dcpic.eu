@@ -52,9 +52,12 @@ class AuthController extends Controller
         return redirect()->route('dashboard'); // Placeholder route
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        $locale = session('locale'); // Keep the user's locale
         Auth::logout();
+        $request->session()->flush();
+        $request->session()->put('locale', $locale); // Restore it
         return redirect('/');
     }
 }
