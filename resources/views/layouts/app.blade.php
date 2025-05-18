@@ -11,9 +11,11 @@
     <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
+	
 <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
-    @include('components.navbar')
+	
     @include('components.announcement')
+    @include('components.navbar')
 
     <main class="flex-grow container mx-auto p-4">
         @include('components.alert')
