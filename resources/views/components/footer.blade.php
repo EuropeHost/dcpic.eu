@@ -1,4 +1,3 @@
-
 <footer class="text-center text-sm text-gray-500 mt-10 py-6 border-t">
     <p>
         &copy; {{ date('Y') }} {{ env('APP_NAME', 'DCPic.eu') }}
