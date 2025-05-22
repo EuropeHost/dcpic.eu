@@ -8,7 +8,7 @@
 
                 <div class="flex justify-between items-center text-sm mt-2 space-x-3">
                     <a href="{{ route('images.show', $image) }}" target="_blank" class="text-blue-500 hover:underline flex items-center space-x-1">
-                        <i class="bi bi-eye"></i> <span>{{ __('View') }}</span>
+                        <i class="bi bi-eye"></i> <span>{{ __('content.view') }}</span>
                     </a>
 
                     <button 
@@ -19,7 +19,7 @@
                         type="button"
                         class="text-gray-500 hover:text-gray-800 flex items-center space-x-1"
                         title="{{ __('Copy link to clipboard') }}">
-                        <i class="bi bi-clipboard"></i> <span>{{ __('Copy Link') }}</span>
+                        <i class="bi bi-clipboard"></i> <span>{{ __('content.copy_link') }}</span>
                     </button>
 
                     @if(auth()->id() === $image->user_id)
@@ -28,7 +28,7 @@
                             type="button"
                             class="text-red-500 hover:underline flex items-center space-x-1"
                         >
-                            <i class="bi bi-trash"></i> <span>{{ __('Delete') }}</span>
+                            <i class="bi bi-trash"></i> <span>{{ __('content.delete') }}</span>
                         </button>
 
                         <div x-show="showDeleteModal" 
@@ -37,19 +37,19 @@
                              @click.away="showDeleteModal = false"
                              >
                             <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
-                                <h3 class="text-lg font-semibold mb-4">{{ __('Delete this image?') }}</h3>
+                                <h3 class="text-lg font-semibold mb-4">{{ __('content.delete_question') }}</h3>
                                 <p class="mb-6 text-gray-600 truncate" title="{{ $image->original_name }}">{{ $image->original_name }}</p>
 
                                 <div class="flex justify-end space-x-3">
                                     <button @click="showDeleteModal = false" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-                                        {{ __('Cancel') }}
+                                        {{ __('content.cancel') }}
                                     </button>
 
                                     <form method="POST" action="{{ route('images.destroy', $image) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-                                            {{ __('Delete') }}
+                                            {{ __('content.delete') }}
                                         </button>
                                     </form>
                                 </div>
