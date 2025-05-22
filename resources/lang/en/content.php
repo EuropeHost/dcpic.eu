@@ -35,4 +35,5 @@ return [
 	'image_deleted' => 'Image deleted',
 	'image_uploaded' => 'Image uploaded successfully',
 	'no_images_yet' => 'No images uploaded yet.',
+	'link_copied' => 'Link Copied to clipboard',
 ];
