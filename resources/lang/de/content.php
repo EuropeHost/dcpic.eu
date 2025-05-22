@@ -17,7 +17,7 @@ return [
     'account_created' => 'Konto erstellt am',
     'rights' => 'Alle Rechte vorbehalten',
     'by' => 'von',
-    'from' => 'aus',
+    'from' => 'von',
     'dashboard' => 'Dashboard',
     'my_images' => 'Meine Bilder',
     'recent_uploads' => 'Letzte Uploads',
