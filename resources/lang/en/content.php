@@ -15,4 +15,8 @@ return [
 	'your_stats' => 'Your stats',
 	'total_images_uploaded' => 'Total images uploaded',
 	'account_created' => 'Account created on',
+	'rights' => 'All rights reserved',
+	'by' => 'by',
+	'from' => 'from',
+	'dashboard' => 'Dashboard',
 ];
