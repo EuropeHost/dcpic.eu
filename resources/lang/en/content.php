@@ -23,4 +23,13 @@ return [
 	'recent_uploads' => 'Recent Uploads',
 	'logout' => 'Log out',
 	'login' => 'Log in',
+	'login_with_discord' => 'Login with Discord',
+	'view' => 'View',
+	'copy_link' => 'Copy Link',
+	'delete' => 'Delete',
+	'delete_question' => 'Delete this image?',
+	'cancel' => 'Cancel',
+	'close' => 'Close',
+	'see_my' => 'Show my Images',
+	'see_recent' => 'Show recent Images',
 ];
