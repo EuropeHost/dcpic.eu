@@ -9,4 +9,10 @@ return [
     'upload' => 'Upload',
     'latest_upload' => 'Latest Upload',
     'see_all' => 'See All Images',
+	'discord_auth_failed' => 'Discord authentication failed',
+	'no_uploads' => 'There are no uploads avaible',
+	'upload_first' => 'You have to upload an image bevore you can see it',
+	'your_stats' => 'Your stats',
+	'total_images_uploaded' => 'Total images uploaded',
+	'account_created' => 'Account created on',
 ];
