@@ -35,4 +35,5 @@ return [
     'image_deleted' => 'Bild gelöscht',
 	'image_uploaded' => 'Bild erfolgreich hochgeladen',
 	'no_images_yet' => 'Es wurden noch keine Bilder hochgeladen.',
+	'link_copied' => 'Link in Zwichenablage kopiert',
 ];
