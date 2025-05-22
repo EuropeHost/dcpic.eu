@@ -70,7 +70,7 @@
                     <div class="bg-white rounded-lg shadow-lg max-w-xs w-full p-6 text-center">
                         <p class="mb-4">{{ __('Link copied to clipboard!') }}</p>
                         <button @click="showCopyModal = false" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-                            {{ __('content.close') }}
+                            {{ __('Close') }}
                         </button>
                     </div>
                 </div>
@@ -83,5 +83,5 @@
         {{ $images->links() }}
     </div>
 @else
-    <p class="text-gray-500">{{ __('No images uploaded yet.') }}</p>
+    <p class="text-gray-500">{{ __('no_images_yet') }}</p>
 @endif
