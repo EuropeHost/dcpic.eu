@@ -19,4 +19,8 @@ return [
 	'by' => 'by',
 	'from' => 'from',
 	'dashboard' => 'Dashboard',
+	'my_images' => 'My Images',
+	'recent_uploads' => '',
+	'logout' => 'Log out',
+	'login' => 'Log in',
 ];
