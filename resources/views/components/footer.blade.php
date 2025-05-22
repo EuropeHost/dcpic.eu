@@ -1,19 +1,19 @@
 <footer class="text-center text-sm text-gray-500 mt-10 py-6 border-t">
     <p>
         &copy; {{ date('Y') }} {{ env('APP_NAME', 'DCPic.eu') }}
-        by 
-        <a href="https://fabianternmis.de" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
-            fabianternmis.de
+        {{ __('content.by') }}
+        <a href="https://fnternis.de" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
+            fternis.de
         </a> 
-        (aka 
+        ( 
         <a href="https://michaelninder.de" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
             michaelninder.de
         </a>)
-        from 
+        {{ __('content.from') }}
         <a href="https://europehost.eu" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
             EuropeHost.eu
         </a> 
-        by 
+        {{ __('content.by') }}
         <a href="https://xpsystems.eu" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
             xpsystems.eu
         </a> 
@@ -39,6 +39,5 @@
             </a>
         @endif
 
-        {{-- Add more social icons here, e.g. Instagram, LinkedIn --}}
     </div>
 </footer>
