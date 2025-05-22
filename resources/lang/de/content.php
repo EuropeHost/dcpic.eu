@@ -32,4 +32,5 @@ return [
     'close' => 'Schließen',
     'see_my' => 'Meine Bilder anzeigen',
     'see_recent' => 'Neueste Bilder anzeigen',
+    'image_deleted' => 'Bild gelöscht',
 ];
