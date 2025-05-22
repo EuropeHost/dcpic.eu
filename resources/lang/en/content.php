@@ -20,7 +20,7 @@ return [
 	'from' => 'from',
 	'dashboard' => 'Dashboard',
 	'my_images' => 'My Images',
-	'recent_uploads' => '',
+	'recent_uploads' => 'Recent Uploads',
 	'logout' => 'Log out',
 	'login' => 'Log in',
 ];
