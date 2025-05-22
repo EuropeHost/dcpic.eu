@@ -32,4 +32,7 @@ return [
 	'close' => 'Close',
 	'see_my' => 'Show my Images',
 	'see_recent' => 'Show recent Images',
+	'image_deleted' => 'Image deleted',
+	'image_uploaded' => 'Image uploaded successfully',
+	'no_images_yet' => 'No images uploaded yet.',
 ];
