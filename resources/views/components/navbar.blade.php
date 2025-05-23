@@ -27,7 +27,7 @@
         <div x-data="{ open: false }" class="relative">
             <button @click="open = !open" class="flex items-center text-sm focus:outline-none">
                 <img src="{{ asset('img/SetLocale/' . app()->getLocale() . '.png') }}"
-                     class="w-34 h-3 mr-1" alt="{{ app()->getLocale() }}">
+                     class="w-34 h-5 mr-1" alt="{{ app()->getLocale() }}">
                 <i class="bi bi-chevron-down text-xs"></i>
             </button>
 
@@ -40,7 +40,7 @@
                             @csrf
                             <input type="hidden" name="locale" value="{{ $lang }}">
                             <button type="submit" class="flex items-center px-3 py-2 hover:bg-gray-100 text-sm w-full">
-                                <img src="{{ asset('img/SetLocale/' . $lang . '.png') }}" class="w-5 h-3 mr-2" alt="{{ $lang }}">
+                                <img src="{{ asset('img/SetLocale/' . $lang . '.png') }}" class="w-7 h-5 mr-1" alt="{{ $lang }}">
                                 {{ strtoupper($lang) }}
                             </button>
                         </form>
@@ -52,7 +52,7 @@
         @auth
         <div x-data="{ open: false }" class="relative">
             <button @click="open = !open" class="flex items-center space-x-2 focus:outline-none">
-                <img src="{{ $avatarUrl }}" alt="User Avatar" class="rounded-full w-8 h-8">
+                <img src="{{ $avatarUrl }}" alt="User Avatar" class="rounded-lg w-8 h-8">
                 <span class="text-gray-700 font-medium">{{ $user->name }}</span>
                 <i class="bi bi-chevron-down text-xs"></i>
             </button>
