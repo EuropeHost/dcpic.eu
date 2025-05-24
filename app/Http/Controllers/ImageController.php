@@ -24,11 +24,8 @@ class ImageController extends Controller
 
     public function store(Request $request)
     {
-		//$user_storage_limit = env(USER_STORAGE_LIMIT)
-		//$user_storage_limit = auth()->user()->storage_limit
-		$user_storage_limit = 120
 			
-        if (auth()->user()->storage_used >= $user_storage_limit * 1024 * 1024) {
+        if (auth()->user()->storage_used >= auth()->user()->storage_limit_mb * 1024 * 1024) {
             return back()->with('error', 'Storage limit exceeded (' . $user_storage_limit . ').');
         }
 
