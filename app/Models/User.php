@@ -50,16 +50,16 @@ class User extends Authenticatable
 	
 	public function getStorageLimitMBAttribute()
 	{
-	    return 25;
+	    return 150;
 	}
 	
 	public function getStoragePercentageAttribute()
 	{
-	    return min(100, round(($this->storage_used / (25 * 1024 * 1024)) * 100, 2));
+	    return min(100, round(($this->storage_used / (150 * 1024 * 1024)) * 100, 2));
 	}
 	
-	public function storage_limit()
+	/*public function storage_limit()
 	{
 		return $this->getStorageLimitMBAttribute;
-	}
+	}*/
 }
