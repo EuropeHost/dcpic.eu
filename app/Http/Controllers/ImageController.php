@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class ImageController extends Controller
@@ -23,12 +24,16 @@ class ImageController extends Controller
 
     public function store(Request $request)
     {
-        if (auth()->user()->storage_used >= 25 * 1024 * 1024) {
-            return back()->with('error', 'Storage limit exceeded (25MiB).');
+		//$user_storage_limit = env(USER_STORAGE_LIMIT)
+		//$user_storage_limit = auth()->user()->storage_limit
+		$user_storage_limit = 120
+			
+        if (auth()->user()->storage_used >= $user_storage_limit * 1024 * 1024) {
+            return back()->with('error', 'Storage limit exceeded (' . $user_storage_limit . ').');
         }
 
         $request->validate([
-            'image' => 'required|image|max:5120', // max 5MB per image
+            'image' => 'required|image|max:10240', // max 10MB per image
         ]);
 
         $file = $request->file('image');
