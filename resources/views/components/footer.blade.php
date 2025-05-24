@@ -2,7 +2,7 @@
     <p>
         &copy; {{ date('Y') }} {{ env('APP_NAME', 'DCPic.eu') }}
         {{ __('content.by') }}
-        <a href="https://fnternis.de" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
+        <a href="https://fternis.de" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
             fternis.de
         </a> 
         ( 
@@ -40,4 +40,10 @@
         @endif
 
     </div>
+
+	<div class="mt-4 text-xs text-gray-600">
+	    <a href="{{ route('legal.show', 'imprint') }}" class="hover:underline">{{ __('legal.imprint.title') }}</a> |
+	    <a href="{{ route('legal.show', 'privacy') }}" class="hover:underline">{{ __('legal.privacy.title') }}</a> |
+	    <a href="{{ route('legal.show', 'terms') }}" class="hover:underline">{{ __('legal.terms.title') }}</a>
+	</div>
 </footer>
