@@ -36,4 +36,6 @@ return [
 	'image_uploaded' => 'Image uploaded successfully',
 	'no_images_yet' => 'No images uploaded yet.',
 	'link_copied' => 'Link Copied to clipboard',
+	'storage_overview' => 'Storage Overview',
+	'average_per_user' => 'Average per User',
 ];
