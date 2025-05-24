@@ -33,7 +33,9 @@ return [
     'see_my' => 'Meine Bilder anzeigen',
     'see_recent' => 'Neueste Bilder anzeigen',
     'image_deleted' => 'Bild gelöscht',
-	'image_uploaded' => 'Bild erfolgreich hochgeladen',
+    'image_uploaded' => 'Bild erfolgreich hochgeladen',
 	'no_images_yet' => 'Es wurden noch keine Bilder hochgeladen.',
 	'link_copied' => 'Link in Zwichenablage kopiert',
+	'storage_overview' => 'Speicher Übersicht',
+	'average_per_user' => 'Durchschnitt pro Nutzer',
 ];
