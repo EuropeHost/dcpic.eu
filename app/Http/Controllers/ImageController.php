@@ -26,7 +26,7 @@ class ImageController extends Controller
     {
 			
         if (auth()->user()->storage_used >= auth()->user()->storage_limit_mb * 1024 * 1024) {
-            return back()->with('error', 'Storage limit exceeded (' . $user_storage_limit . ').');
+            return back()->with('error', __(storage_limit_exceeded) .(' . $user_storage_limit . ').);
         }
 
         $request->validate([
