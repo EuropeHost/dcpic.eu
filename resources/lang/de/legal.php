@@ -4,90 +4,97 @@ return [
     'imprint' => [
         'title' => 'Impressum',
         'content' => <<<EOT
-### Verantwortliche Stelle
+## Verantwortliche Stelle
 
 Dieser Dienst wird betrieben von **EuropeHost.eu**, einer Marke von **XPSystems.eu**, geführt von **Fabian Ternis**.
 
-Verantwortlich gemäß § 5 TMG:
+Verantwortlich nach § 5 TMG:
 
 - **Fabian Ternis**, XPSystems.eu  
 - E-Mail: [f.ternis@xpsystems.eu](mailto:f.ternis@xpsystems.eu)  
 - Website: [xpsystems.eu](https://xpsystems.eu)
 
-### Urheberrecht
+## Urheberrecht & Eigentum
 
-Alle hochgeladenen Bilder bleiben Eigentum ihrer Urheber.  
-DCPic.eu beansprucht keine Rechte an Inhalten.  
-Mit dem Hochladen erteilen Sie eine nicht-exklusive Lizenz zur Speicherung und Auslieferung.
+Alle hochgeladenen Bilder bleiben geistiges Eigentum ihrer Ersteller.  
+DCPic.eu beansprucht **keine Rechte an Inhalten**.
 
-Urheberrechtsverstöße führen zur sofortigen Löschung und möglichen Sperrung.
+Mit dem Upload gewähren Nutzer eine **nicht-exklusive, widerrufbare Lizenz** zur Speicherung, Bereitstellung und optionalen öffentlichen Anzeige.  
+Als öffentlich markierte Bilder können unter „neueste Uploads“ erscheinen.
 
-### Kontakt
+Urheberrechtsverstöße führen zur sofortigen Löschung und ggf. zur Sperrung.
 
-Rechtliche Anfragen bitte an: [f.ternis@xpsystems.eu](mailto:f.ternis@xpsystems.eu)
+## Kontakt
+
+Für rechtliche Anfragen wenden Sie sich bitte an: [f.ternis@xpsystems.eu](mailto:f.ternis@xpsystems.eu)
 EOT
     ],
 
     'privacy' => [
         'title' => 'Datenschutzerklärung',
         'content' => <<<EOT
-### Welche Daten wir erfassen
+## Welche Daten wir speichern
 
-Wir speichern nur die notwendigsten Daten:
+Wir speichern nur die Daten, die zur Nutzung des Dienstes notwendig sind:
 
 - Ihre Discord-ID und Benutzername
-- Metadaten Ihrer hochgeladenen Bilder (Dateiname, Größe, Format)
+- E-Mail-Adresse von Discord
+- Bild-Metadaten (Dateiname, Größe, Format)
 - Zeitstempel und Speicherverbrauch
 
-### Bildzugriff
+## Sichtbarkeit der Bilder
 
-Ihre Bilder sind **standardmäßig privat**.  
-Nur Personen mit Direktlink können sie aufrufen.
+Bilder sind **standardmäßig privat**.  
+Nur wer den direkten Link besitzt, kann sie ansehen.  
+Sie können Ihre Bilder optional als **öffentlich** markieren – diese erscheinen dann unter „neueste Uploads“.
 
-### Kein Tracking
+## Kein Tracking & Keine Werbung
 
-Diese Seite verwendet **keine Cookies**, keine Werbung und kein externes Tracking.
+Diese Plattform verwendet **keine Cookies, keine Tracker, keine Werbung**.
 
-### Datenlöschung
+## Datenlöschung
 
-Sie können jederzeit die Löschung Ihrer Daten anfordern.  
-Senden Sie eine E-Mail von Ihrem Discord-Konto an [f.ternis@xpsystems.eu](mailto:f.ternis@xpsystems.eu).
+Sie können jederzeit die Löschung aller Ihrer Daten beantragen.  
+Bitte senden Sie die Anfrage **von der mit Ihrem Discord-Konto verknüpften E-Mail-Adresse** an [f.ternis@xpsystems.eu](mailto:f.ternis@xpsystems.eu).
 
-### Hosting & DSGVO
+## Speicherung & DSGVO
 
-Alle Daten werden auf Servern innerhalb der EU gespeichert und unterliegen der **DSGVO**.
+Alle Daten werden sicher innerhalb der Europäischen Union gespeichert  
+und unterliegen den Bestimmungen der **Datenschutz-Grundverordnung (DSGVO)**.
 EOT
     ],
 
-    'terms' => [
-        'title' => 'Nutzungsbedingungen',
-        'content' => <<<EOT
-### Nutzungsregeln
+	'terms' => [
+	    'title' => 'Nutzungsbedingungen',
+	    'content' => <<<EOT
+## Regeln zur Nutzung
 
-- Kein Upload illegaler, schädlicher, hasserfüllter oder pornografischer Inhalte.
+- Keine illegalen, schädlichen, hasserfüllten oder pornografischen Inhalte hochladen.
 - Inhalte müssen deutschem und EU-Recht entsprechen.
-- Sie tragen die volle Verantwortung für hochgeladene Inhalte.
+- Sie tragen die volle Verantwortung für Ihre Uploads.
 
-### Urheberrecht
+## Urheberrecht
 
-Sie behalten das volle Urheberrecht.  
-Wir benötigen lediglich eine Lizenz zur Speicherung und Anzeige.
+Sie behalten alle Rechte an Ihren Bildern.  
+Wir benötigen lediglich eine **nicht-exklusive Lizenz** zur Speicherung und Anzeige.  
+Sie können die öffentliche Sichtbarkeit jederzeit widerrufen.
 
-### Speichergrenzen
+## Speicherlimit
 
-Jeder Benutzer hat maximal 25MB Speicher.  
-Versuche zur Umgehung können zur Sperrung führen.
+Jeder Nutzer hat ein Standard-Speicherlimit von **25MB**.  
+Dieses Limit kann **jederzeit ohne Vorankündigung geändert werden**.  
+Versuche, die Grenze zu umgehen, können zur Einschränkung oder Sperrung führen.
 
-### Verfügbarkeit
+## Verfügbarkeit
 
-Dieser Dienst ist **experimentell und kostenlos**.  
-Es besteht kein Anspruch auf Verfügbarkeit oder Erreichbarkeit.  
-Der Dienst kann jederzeit verändert oder eingestellt werden.
+DCPic.eu ist ein **kostenloser, experimenteller Dienst**.  
+Es gibt **keine Garantie auf ständige Verfügbarkeit oder Erreichbarkeit**.  
+Der Dienst kann jederzeit ohne Vorankündigung geändert oder eingestellt werden.
 
-### Änderungen
+## Zustimmung & Änderungen
 
-Mit Nutzung akzeptieren Sie diese Bedingungen.  
+Mit der Nutzung akzeptieren Sie diese Bedingungen.  
 Diese können jederzeit angepasst werden.
 EOT
-    ],
+	],
 ];
