@@ -10,12 +10,13 @@
 
     <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+	
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/discord-login-btn.css') }}">
 </head>
-	
 <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
-	
-    @include('components.announcement')
     @include('components.navbar')
+    @include('components.announcement')
 
     <main class="flex-grow container mx-auto p-4">
         @include('components.alert')
