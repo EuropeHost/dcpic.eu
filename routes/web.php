@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-images', [ImageController::class, 'myImages'])->name('images.my');
     Route::post('/images', [ImageController::class, 'store'])->name('images.store');
     Route::delete('/images/{image}', [ImageController::class, 'destroy'])->name('images.destroy');
+	Route::patch('/images/{image}/visibility', [ImageController::class, 'toggleVisibility'])->name('images.toggleVisibility');
 });
 
 Route::get('/recent-uploads', [ImageController::class, 'recentUploads'])->name('images.recent');
