@@ -15,17 +15,24 @@
 
     <div class="bg-white shadow rounded p-6 mb-6">
         <h2 class="text-lg font-semibold mb-4">{{ __('content.upload_image') }}</h2>
-        <form action="{{ route('images.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="flex items-center space-x-3">
-                <input type="file" name="image" required class="border rounded px-3 py-2 w-full text-sm">
-                <button type="submit"
-                        class="bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 transition text-sm">
-                    <i class="bi bi-upload"></i> {{ __('content.upload') }}
-                </button>
-            </div>
-        </form>
+		<form action="{{ route('images.store') }}" method="POST" enctype="multipart/form-data">
+		    @csrf
+		    <div class="flex flex-col md:flex-row items-center md:space-x-3 space-y-2 md:space-y-0">
+		        <input type="file" name="image" required class="border rounded px-3 py-2 text-sm w-full md:w-auto">
+		        
+		        <select name="is_public" class="border rounded px-3 py-2 text-sm">
+		            <option value="0">{{ __('Private') }}</option>
+		            <option value="1">{{ __('Public') }}</option>
+		        </select>
+		
+		        <button type="submit"
+		                class="bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 transition text-sm">
+		            <i class="bi bi-upload"></i> {{ __('content.upload') }}
+		        </button>
+		    </div>
+		</form>
     </div>
+
 
     @if($latestImage)
         <div class="mb-6">
