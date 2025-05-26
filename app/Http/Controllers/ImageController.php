@@ -64,6 +64,23 @@ class ImageController extends Controller
         Storage::delete("public/images/{$image->filename}");
         $image->delete();
 
-        return back()->with('success', __('image_deleted'));
+        return back()->with('success', __('content.image_deleted'));
     }
+	
+	public function toggleVisibility(Request $request, Image $image)
+	{
+	    if ($image->user_id !== auth()->id()) {
+	        abort(403);
+	    }
+	
+	    $request->validate([
+	        'is_public' => 'required|boolean',
+	    ]);
+	
+	    $image->is_public = $request->boolean('is_public');
+	    $image->save();
+	
+	    return back()->with('success', __('content.visibility_updated'));
+	}
+
 }
