@@ -81,7 +81,7 @@ Sie können die öffentliche Sichtbarkeit jederzeit widerrufen.
 
 ## Speicherlimit
 
-Jeder Nutzer hat ein Standard-Speicherlimit von **25MB**.  
+Jeder Nutzer hat ein Standard-Speicherlimit von **150MB**.  
 Dieses Limit kann **jederzeit ohne Vorankündigung geändert werden**.  
 Versuche, die Grenze zu umgehen, können zur Einschränkung oder Sperrung führen.
 
