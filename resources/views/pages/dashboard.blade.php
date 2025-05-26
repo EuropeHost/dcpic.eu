@@ -21,8 +21,8 @@
 		        <input type="file" name="image" required class="border rounded px-3 py-2 text-sm w-full md:w-auto">
 		        
 		        <select name="is_public" class="border rounded px-3 py-2 text-sm">
-		            <option value="0">{{ __('Private') }}</option>
-		            <option value="1">{{ __('Public') }}</option>
+		            <option value="0">{{ __('content.private') }}</option>
+		            <option value="1">{{ __('content.public') }}</option>
 		        </select>
 		
 		        <button type="submit"
