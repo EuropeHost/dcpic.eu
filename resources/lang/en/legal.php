@@ -81,7 +81,7 @@ You can revoke public access at any time by deleting or unpublishing your images
 
 ## Storage Limits
 
-Each user is granted a maximum quota of **25MB**.  
+Each user is granted a maximum quota of **150MB**.  
 This limit may be **adjusted at any time** without prior notice.  
 Attempts to bypass storage restrictions may result in account limitations or bans.
 
