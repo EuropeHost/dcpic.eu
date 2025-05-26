@@ -97,5 +97,4 @@ By using this platform, you agree to these terms.
 We may update them periodically. Continued usage implies consent.
 EOT
 	],
-
 ];
