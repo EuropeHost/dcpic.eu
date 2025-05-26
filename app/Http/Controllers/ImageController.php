@@ -18,7 +18,7 @@ class ImageController extends Controller
 
     public function recentUploads()
     {
-        $images = Image::latest()->paginate(12);
+        $images = Image::where('is_public', true)->latest()->paginate(12);
         return view('images.recent-uploads', compact('images'));
     }
 
@@ -37,13 +37,15 @@ class ImageController extends Controller
         $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
         $file->storeAs('public/images', $filename);
 
-        Image::create([
-            'user_id' => auth()->id(),
-            'filename' => $filename,
-            'original_name' => $file->getClientOriginalName(),
-            'mime' => $file->getClientMimeType(),
-            'size' => $file->getSize(),
-        ]);
+		Image::create([
+		    'user_id' => auth()->id(),
+		    'filename' => $filename,
+		    'original_name' => $file->getClientOriginalName(),
+		    'mime' => $file->getClientMimeType(),
+		    'size' => $file->getSize(),
+		    'is_public' => $request->boolean('is_public'),
+		]);
+
 
         return back()->with('success', __('image_uploaded'));
     }
