@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.4s ease;
+    transition: opacity 1.45s ease;
 }
 
 #preloader.hidden {
