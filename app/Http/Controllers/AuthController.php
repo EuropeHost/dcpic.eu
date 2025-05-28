@@ -67,11 +67,16 @@ class AuthController extends Controller
 	
 	public function logout(Request $request)
 	{
-	    $locale = session('locale'); // Keep the user's locale
+	    $locale = session('locale');
+	    $dismissed = session('dismissed_announcements');
+	
 	    Auth::logout();
 	    $request->session()->flush();
-	    $request->session()->put('locale', $locale); // Restore it
+	
+	    // Restore important session values
+	    $request->session()->put('locale', $locale);
+	    $request->session()->put('dismissed_announcements', $dismissed);
+	
 	    return redirect('/');
 	}
-
 }
