@@ -19,7 +19,10 @@
 		<form action="{{ route('images.store') }}" method="POST" enctype="multipart/form-data">
 		    @csrf
 		    <div class="flex flex-col md:flex-row items-center md:space-x-3 space-y-2 md:space-y-0">
-		        <input type="file" name="file" accept="image/*,video/*" required class="border rounded px-3 py-2 text-sm w-full md:w-auto">
+				<input type="file" name="file" accept="image/*,video/mp4" required>
+				<small class="text-xs text-gray-500">
+				    {{ __('Only .mp4 videos and images (JPG, PNG, GIF, WebP) are allowed. Max size: :max MB.', ['max' => env('MAX_FILE_SIZE', 50)]) }}
+				</small>
 		        
 		        <select name="is_public" class="border rounded px-3 py-2 text-sm">
 		            <option value="0">{{ __('content.private') }}</option>
