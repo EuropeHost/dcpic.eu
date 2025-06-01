@@ -30,5 +30,18 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/recent-uploads', [ImageController::class, 'recentUploads'])->name('images.recent');
 Route::get('/images/{image}', [ImageController::class, 'show'])->name('images.show');
+Route::get('/i/{image}', [ImageController::class, 'show']);
+Route::get('/v/{image}', [ImageController::class, 'show']);
+Route::get('/img/{image}', [ImageController::class, 'show'])->name('img.show');
+Route::get('/vid/{image}', [ImageController::class, 'show'])->name('vid.show');
+Route::get('/vdo/{image}', [ImageController::class, 'show']);
+Route::get('/image/{image}', [ImageController::class, 'show']);
+Route::get('/video/{image}', [ImageController::class, 'show']);
+Route::get('/media/{image}', [ImageController::class, 'show']);
 
 Route::get('/legal/{section}', [LegalController::class, 'show'])->name('legal.show');
+
+Route::post('/announcement/dismiss/{id}', function ($id) {
+    session()->put("announcement_dismissed_{$id}", true);
+    return back();
+})->name('announcement.dismiss');
