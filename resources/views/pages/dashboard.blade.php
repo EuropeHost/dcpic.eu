@@ -1,3 +1,4 @@
+
 @extends('layouts.main')
 
 @section('main')
@@ -18,7 +19,7 @@
 		<form action="{{ route('images.store') }}" method="POST" enctype="multipart/form-data">
 		    @csrf
 		    <div class="flex flex-col md:flex-row items-center md:space-x-3 space-y-2 md:space-y-0">
-		        <input type="file" name="image" required class="border rounded px-3 py-2 text-sm w-full md:w-auto">
+		        <input type="file" name="file" accept="image/*,video/*" required class="border rounded px-3 py-2 text-sm w-full md:w-auto">
 		        
 		        <select name="is_public" class="border rounded px-3 py-2 text-sm">
 		            <option value="0">{{ __('content.private') }}</option>
@@ -38,7 +39,15 @@
         <div class="mb-6">
             <h3 class="text-md font-semibold mb-2">{{ __('content.latest_upload') }}</h3>
             <div class="bg-white border rounded shadow p-4">
-                <img src="{{ route('images.show', $latestImage) }}" class="max-w-full h-auto rounded mb-2" alt="{{ $latestImage->original_name }}">
+                @if(Str::startsWith($latestImage->mime, 'video/'))
+				    <video controls class="max-w-full h-auto rounded mb-2">
+				        <source src="{{ route('images.show', $latestImage) }}" type="{{ $latestImage->mime }}">
+				        {{ __('content.video_not_supported') }}
+				    </video>
+				@else
+				    <img src="{{ route('images.show', $latestImage) }}" class="max-w-full h-auto rounded mb-2" alt="{{ $latestImage->original_name }}">
+				@endif
+
                 <div class="flex space-x-4 text-sm">
                     <a href="{{ route('images.my') }}" class="text-sky-600 hover:underline">
                         {{ __('content.see_my') }}
