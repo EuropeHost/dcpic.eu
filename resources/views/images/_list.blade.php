@@ -4,9 +4,17 @@
             <div x-data="{ showCopyModal: false, showDeleteModal: false }" class="border rounded shadow p-2 bg-white relative">
                 
                 {{-- Image Preview --}}
-                <img src="{{ route('images.show', $image) }}" 
-                     alt="{{ $image->original_name }}" 
-                     class="w-full h-40 object-cover rounded mb-2">
+				@if(Str::startsWith($image->mime, 'video/'))
+				    <video controls class="w-full h-40 object-cover rounded mb-2">
+				        <source src="{{ route('images.show', $image) }}" type="{{ $image->mime }}">
+				        {{ __('content.video_not_supported') }}
+				    </video>
+				@else
+				    <img src="{{ route('images.show', $image) }}" 
+				         alt="{{ $image->original_name }}" 
+				         class="w-full h-40 object-cover rounded mb-2">
+				@endif
+
 
                 {{-- Top row: View + Copy --}}
                 <div class="flex justify-between items-center text-sm mt-2">
