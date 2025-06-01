@@ -30,10 +30,10 @@ class ImageController extends Controller
 	        return back()->with('error', __('content.storage_limit_exceeded') . ' (' . $user->storage_limit_mb . ' MB)');
 	    }
 	
-	    $request->validate([
-	        'file' => 'required|file|max:51200', // up to 50MB
-	        'is_public' => 'nullable|boolean',
-	    ]);
+		$request->validate([
+		    'file' => 'required|file|mimetypes:video/mp4,image/jpeg,image/webp,image/png,image/gif|max:51200',
+		    'is_public' => 'nullable|boolean',
+		]);
 	
 	    $file = $request->file('file');
 	    $mime = $file->getMimeType();
@@ -45,6 +45,12 @@ class ImageController extends Controller
 	        return back()->with('error', __('Only images or videos are allowed.'));
 	    }
 	
+		/*
+		if ($isVideo && $mime !== 'video/mp4') {
+		    return back()->with('error', __('content.only_mp4_allowed'));
+		}
+		*/
+
 	    $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
 	    $file->storeAs('public/images', $filename); // optional: use separate folder later
 	
@@ -63,10 +69,26 @@ class ImageController extends Controller
 	        : __('content.image_uploaded'));
 	}
 
-    public function show(Image $image)
-    {
-        return response()->file(storage_path("app/public/images/{$image->filename}"));
-    }
+	public function show(Image $image)
+	{
+	    $path = storage_path("app/public/images/{$image->filename}");
+	
+	    if (!file_exists($path)) {
+	        abort(404);
+	    }
+	
+	    $headers = [
+	        'Content-Type' => $image->mime, // from DB
+	        'Content-Disposition' => 'inline; filename="' . $image->original_name . '"'
+	    ];
+	
+	  //  return response()->file($path, $headers);
+		return response()->file($path, [
+		    'Content-Type' => $image->mime,
+		    'Content-Disposition' => 'inline; filename="' . $image->original_name . '"'
+		]);
+	}
+
 
     public function destroy(Image $image)
     {
