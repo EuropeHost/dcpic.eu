@@ -29,25 +29,43 @@ class ImageController extends Controller
 			return back()->with('error', __('content.storage_limit_exceeded') . ' (' . $user_storage_limit . ').');
         }
 
-        $request->validate([
-            'image' => 'required|image|max:10240', // max 10MB per image
-        ]);
-
-        $file = $request->file('image');
-        $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/images', $filename);
-
+		$request->validate([
+		    'file' => 'required|file|max:51200', // up to 50MB
+		    'is_public' => 'nullable|boolean',
+		]);
+		
+		$file = $request->file('file');
+		$mime = $file->getMimeType();
+		
+		$isImage = Str::startsWith($mime, 'image/');
+		$isVideo = Str::startsWith($mime, 'video/');
+		
+		if (!$isImage && !$isVideo) {
+		    return back()->with('error', __('Only images or videos are allowed.'));
+		}
+		
+		$filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+		$file->storeAs('public/images', $filename); // Consider renaming path later
+		
 		Image::create([
 		    'user_id' => auth()->id(),
+		    'type' => $isVideo ? 'video' : 'image',
 		    'filename' => $filename,
 		    'original_name' => $file->getClientOriginalName(),
-		    'mime' => $file->getClientMimeType(),
+		    'mime' => $mime,
 		    'size' => $file->getSize(),
 		    'is_public' => $request->boolean('is_public'),
 		]);
 
-
-        return back()->with('success', __('content.image_uploaded'));
+		if($isVideo)
+		{
+        	return back()->with('success', __('content.video_uploaded'));
+		};
+		
+		if(!$isVideo)
+		{
+        	return back()->with('success', __('content.image_uploaded'));
+		};
     }
 
     public function show(Image $image)
