@@ -29,7 +29,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/recent-uploads', [ImageController::class, 'recentUploads'])->name('images.recent');
-Route::get('/images/{image}', [ImageController::class, 'show'])->name('images.show');
+Route::get('/madia/{image}', [ImageController::class, 'show'])->name('images.show');
+Route::get('/images/{image}', [ImageController::class, 'show']);
 Route::get('/i/{image}', [ImageController::class, 'show']);
 Route::get('/v/{image}', [ImageController::class, 'show']);
 Route::get('/img/{image}', [ImageController::class, 'show'])->name('img.show');
