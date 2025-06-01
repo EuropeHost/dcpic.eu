@@ -40,8 +40,3 @@ Route::get('/video/{image}', [ImageController::class, 'show']);
 Route::get('/media/{image}', [ImageController::class, 'show']);
 
 Route::get('/legal/{section}', [LegalController::class, 'show'])->name('legal.show');
-
-Route::post('/announcement/dismiss/{id}', function ($id) {
-    session()->put("announcement_dismissed_{$id}", true);
-    return back();
-})->name('announcement.dismiss');
