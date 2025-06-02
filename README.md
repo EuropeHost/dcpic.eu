@@ -1,7 +1,7 @@
 # dcpics.eu
 FREE Laravel Discord Image Host Source
 ---
-you have to run `php artisan starage:link ` to be able to use the internal storage as in the public/starage folder
+you have to run `php artisan storage:link` to be able to use the internal storage as in the public/storage folder
 
 create your discord application at https://discord.com/developers/applications
 requires php 8.1 or newer
