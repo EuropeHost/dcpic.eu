@@ -21,8 +21,9 @@
 	    <div class="spinner"></div>
 	</div>
 	
-    @include('components.navbar')
     @include('components.announcement')
+	
+    @include('components.navbar')
 
     <main class="flex-grow container mx-auto p-4">
         @include('components.alert')
