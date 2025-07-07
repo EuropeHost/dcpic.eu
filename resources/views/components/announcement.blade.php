@@ -56,6 +56,6 @@ $announcements = [
                 @csrf
                 <button type="submit" class="text-sm text-gray-600 hover:text-gray-800 transition">&times;</button>
             </form>
-        </div->
+        </div-->
     @endif
 @endforeach
