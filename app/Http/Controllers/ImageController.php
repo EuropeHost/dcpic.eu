@@ -51,10 +51,12 @@ class ImageController extends Controller
 		}
 		*/
 
-	    $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+	    $fileid = Str::uuid();
+	    $filename = $fileid . '.' . $file->getClientOriginalExtension();
 	    $file->storeAs('public/images', $filename); // optional: use separate folder later
 	
 	    Image::create([
+			'id' => $fileid,
 	        'user_id' => $user->id,
 	        'type' => $isVideo ? 'video' : 'image',
 	        'filename' => $filename,
