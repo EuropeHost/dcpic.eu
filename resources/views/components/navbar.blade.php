@@ -31,10 +31,16 @@
                     <i class="bi bi-clock-history"></i>
                     <span>{{ __('content.recent_uploads') }}</span>
                 </a>
+			@if ($user->role === 'admin')
+				
+			    <a href="{{ route('admin.dashboard') }}"
+			        class="text-gray-700 hover:text-sky-600 font-medium flex items-center space-x-1">
+			        <i class="bi bi-speedometer"></i>
+			        <span>{{ __('admin.admin_dashboard') }}</span>
+			    </a>
+			@endif
             </div>
         @endauth
-		
-		
 		
         <div x-data="{ open: false }" class="relative z-20">
             <button @click="open = !open" class="flex items-center text-sm focus:outline-none px-2 py-1 rounded-md hover:bg-gray-100 transition">
@@ -91,7 +97,15 @@
                             <span>{{ __('content.recent_uploads') }}</span>
                         </a>
                     </div>
-
+					
+					@if ($user->role === 'admin')
+					    <a href="{{ route('admin.dashboard') }}"
+					        class="block text-gray-700 hover:bg-gray-100 hover:text-sky-600 font-medium flex items-center space-x-2 text-sm px-4 py-2">
+					        <i class="bi bi-speedometer"></i>
+					        <span>{{ __('admin.admin_dashboard') }}</span>
+					    </a>
+					@endif
+					
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <button type="submit"
