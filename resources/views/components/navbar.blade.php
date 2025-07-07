@@ -68,7 +68,7 @@
                 </button>
 
                 <div x-show="open" @click.away="open = false" x-transition
-                    class="absolute right-0 mt-2 w-40 bg-white border rounded shadow-lg z-50">
+                    class="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-50">
                     <a href="{{ route('dashboard') }}"
                         class="block text-gray-700 hover:bg-gray-100 hover:text-sky-600 font-medium flex items-center space-x-2 text-sm px-4 py-2"> {{-- Changed to block and adjusted px/py --}}
                         <i class="bi bi-speedometer"></i>
