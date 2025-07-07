@@ -42,4 +42,5 @@ return [
 	'link_copied' => 'Lien copié dans le presse-papiers',
 	'storage_overview' => 'Aperçu du stockage',
 	'average_per_user' => 'Moyenne par utilisateur',
+	'choose_file' => 'Choisir un fichier',
 ];
