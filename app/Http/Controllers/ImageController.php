@@ -56,7 +56,7 @@ class ImageController extends Controller
 	    $file->storeAs('public/images', $filename); // optional: use separate folder later
 	
 	    Image::create([
-			'id' => $fileid,
+	        'id' => $fileid,
 	        'user_id' => $user->id,
 	        'type' => $isVideo ? 'video' : 'image',
 	        'filename' => $filename,
