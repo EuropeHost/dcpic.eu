@@ -31,6 +31,15 @@ class AdminController extends Controller
                      ->orderBy('created_at', 'desc')
                      ->paginate(15);
 
+        $users->getCollection()->transform(function ($user) {
+            $avatarUrl = asset('img/default-avatar.png'); // Default fallback
+            if ($user->discord_id && $user->avatar) {
+                $avatarUrl = "https://cdn.discordapp.com/avatars/{$user->discord_id}/{$user->avatar}.png";
+            }
+            $user->avatar_url = $avatarUrl; // custom attribute
+            return $user;
+        });
+
         return view('admin.dashboard', compact(
             'totalUsers',
             'totalImages',
