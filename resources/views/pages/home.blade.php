@@ -16,7 +16,6 @@
         @endguest
 
         <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {{-- Global Storage Overview Card --}}
             <div class="bg-white border shadow-lg rounded-xl p-8 flex flex-col justify-between transform transition duration-300 hover:scale-105 hover:shadow-xl">
                 <div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ __('content.storage_overview') }}</h2>
@@ -37,7 +36,6 @@
                 </div>
             </div>
 
-            {{-- General Statistics Card --}}
             <div class="bg-white border shadow-lg rounded-xl p-8 flex flex-col justify-between transform transition duration-300 hover:scale-105 hover:shadow-xl">
                 <div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ __('content.general_stats') }}</h2>
@@ -53,13 +51,15 @@
                 </div>
             </div>
 
-            {{-- Top Users by Storage --}}
             <div class="bg-white border shadow-lg rounded-xl p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl col-span-1 md:col-span-2 lg:col-span-1">
                 <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ __('content.top_storage_users') }}</h2>
                 @if ($topStorageUsers->isNotEmpty())
                     <ul class="space-y-3">
-                        @foreach ($topStorageUsers as $user)
-                            <li class="flex items-center space-x-3 bg-gray-50 p-2 rounded-lg">
+                        @foreach ($topStorageUsers as $index => $user)
+                            <li class="flex items-center space-x-3 bg-gray-50 p-2 rounded-lg transform transition duration-200 hover:scale-[1.02] hover:bg-gray-100 hover:shadow-sm cursor-pointer">
+                                <div class="w-8 h-8 flex items-center justify-center text-lg font-bold text-sky-600 bg-sky-100 rounded-full flex-shrink-0">
+                                    {{ $index + 1 }}
+                                </div>
                                 <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-10 h-10 rounded-full object-cover border-2 border-sky-400">
                                 <div class="flex-grow">
                                     <p class="font-semibold text-gray-800">{{ $user->name }}</p>
@@ -74,13 +74,15 @@
             </div>
         </div>
 
-        {{-- Top Users by Image Count - Separate Section --}}
         <div class="mt-12 bg-white border shadow-lg rounded-xl p-8 max-w-6xl mx-auto transform transition duration-300 hover:scale-105 hover:shadow-xl">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ __('content.top_image_users') }}</h2>
             @if ($topImageUsers->isNotEmpty())
                 <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @foreach ($topImageUsers as $user)
-                        <li class="flex items-center space-x-3 bg-gray-50 p-2 rounded-lg">
+                    @foreach ($topImageUsers as $index => $user)
+                        <li class="flex items-center space-x-3 bg-gray-50 p-2 rounded-lg transform transition duration-200 hover:scale-[1.02] hover:bg-gray-100 hover:shadow-sm cursor-pointer">
+                            <div class="w-8 h-8 flex items-center justify-center text-lg font-bold text-sky-600 bg-sky-100 rounded-full flex-shrink-0">
+                                {{ $index + 1 }}
+                            </div>
                             <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-10 h-10 rounded-full object-cover border-2 border-sky-400">
                             <div class="flex-grow">
                                 <p class="font-semibold text-gray-800">{{ $user->name }}</p>
