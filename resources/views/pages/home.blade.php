@@ -23,15 +23,17 @@
                         <div class="bg-sky-600 h-4 rounded-full transition-all" style="width: {{ $storagePercentage }}%"></div>
                     </div>
                     <p class="text-lg text-gray-700 font-semibold mb-1">
-                        {{ number_format($totalUsed / 1048576, 2) }} MB /
-                        {{ number_format($totalLimit / 1073741824, 2) }} GiB
+                        <span class="animated-count" data-start="0" data-end="{{ number_format($totalUsed / 1048576, 2, '.', '') }}" data-decimals="2"></span> MB /
+                        <span class="animated-count" data-start="0" data-end="{{ number_format($totalLimit / 1073741824, 2, '.', '') }}" data-decimals="2"></span> GiB
                     </p>
-                    <p class="text-md text-gray-600">({{ number_format($storagePercentage, 1) }}% {{ __('content.used') }})</p>
+                    <p class="text-md text-gray-600">
+                        (<span class="animated-count" data-start="0" data-end="{{ number_format($storagePercentage, 1, '.', '') }}" data-decimals="1"></span>% {{ __('content.used') }})
+                    </p>
                 </div>
                 <div class="mt-6 pt-4 border-t border-gray-200">
                     <p class="text-md text-gray-700">
                         <strong>{{ __('content.average_per_user') }}:</strong>
-                        {{ number_format($avgPerUser / 1048576, 2) }} MB
+                        <span class="animated-count" data-start="0" data-end="{{ number_format($avgPerUser / 1048576, 2, '.', '') }}" data-decimals="2"></span> MB
                     </p>
                 </div>
             </div>
@@ -40,10 +42,12 @@
                 <div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ __('content.general_stats') }}</h2>
                     <p class="text-lg text-gray-700 mb-2">
-                        <i class="bi bi-person-fill text-sky-600 mr-2"></i><strong>{{ __('content.total_users') }}:</strong> {{ number_format($totalUsers) }}
+                        <i class="bi bi-person-fill text-sky-600 mr-2"></i><strong>{{ __('content.total_users') }}:</strong>
+                        <span class="animated-count" data-start="0" data-end="{{ number_format($totalUsers, 0, '.', '') }}" data-decimals="0"></span>
                     </p>
                     <p class="text-lg text-gray-700">
-                        <i class="bi bi-image-fill text-sky-600 mr-2"></i><strong>{{ __('content.total_images_uploaded') }}:</strong> {{ number_format($totalImages) }}
+                        <i class="bi bi-image-fill text-sky-600 mr-2"></i><strong>{{ __('content.total_images_uploaded') }}:</strong>
+                        <span class="animated-count" data-start="0" data-end="{{ number_format($totalImages, 0, '.', '') }}" data-decimals="0"></span>
                     </p>
                 </div>
                 <div class="mt-6 pt-4 border-t border-gray-200">
@@ -63,7 +67,9 @@
                                 <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-10 h-10 rounded-full object-cover border-2 border-sky-400">
                                 <div class="flex-grow">
                                     <p class="font-semibold text-gray-800">{{ $user->name }}</p>
-                                    <p class="text-sm text-gray-600">{{ $user->storage_used_mb }} MB</p>
+                                    <p class="text-sm text-gray-600">
+                                        <span class="animated-count" data-start="0" data-end="{{ number_format(floatval(str_replace(',', '', $user->storage_used_mb)), 2, '.', '') }}" data-decimals="2"></span> MB
+                                    </p>
                                 </div>
                             </li>
                         @endforeach
@@ -86,7 +92,9 @@
                             <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-10 h-10 rounded-full object-cover border-2 border-sky-400">
                             <div class="flex-grow">
                                 <p class="font-semibold text-gray-800">{{ $user->name }}</p>
-                                <p class="text-sm text-gray-600">{{ $user->image_count }} {{ __('content.images') }}</p>
+                                <p class="text-sm text-gray-600">
+                                    <span class="animated-count" data-start="0" data-end="{{ number_format($user->image_count, 0, '.', '') }}" data-decimals="0"></span> {{ __('content.images') }}
+                                </p>
                             </div>
                         </li>
                     @endforeach
@@ -96,4 +104,37 @@
             @endif
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            // This function animates a number from start to end over a duration
+            function animateCount(element, duration = 5000) {
+                const start = parseFloat(element.dataset.start);
+                const end = parseFloat(element.dataset.end);
+                const decimals = parseInt(element.dataset.decimals);
+
+                let startTime = null;
+                const updateCount = (currentTime) => {
+                    if (!startTime) startTime = currentTime;
+                    const progress = Math.min((currentTime - startTime) / duration, 1);
+                    const value = start + (end - start) * progress;
+
+                    element.textContent = value.toFixed(decimals);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCount);
+                    }
+                };
+                requestAnimationFrame(updateCount);
+            };
+
+            window.addEventListener('load', () => {
+                // Find elements with 'animated-count' class
+                document.querySelectorAll('.animated-count').forEach(element => {
+                    // animation for each element
+                    animateCount(element);
+                });
+            });
+        </script>
+    @endpush
 @endsection
