@@ -44,7 +44,7 @@
             </button>
 
             <div x-show="open" @click.away="open = false" x-transition.origin.top-right
-                 class="absolute right-0 mt-2 w-24 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden">
+                 class="absolute right-0 mt-2 w-20 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden">
                 @foreach(File::directories(resource_path('lang')) as $langDir)
                     @php $lang = basename($langDir); @endphp
                     @if($lang !== app()->getLocale())
