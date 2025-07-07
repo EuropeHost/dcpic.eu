@@ -2,21 +2,14 @@
     <p>
         &copy; {{ date('Y') }} {{ env('APP_NAME', 'DCPic.eu') }}
         {{ __('content.by') }}
-        <a href="https://fternis.de" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
-            fternis.de
-        </a> 
+        <a href="https://fternis.de" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">fternis.de</a> 
         ( 
-        <a href="https://michaelninder.de" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
-            michaelninder.de
-        </a>)
+        <a href="https://michaelninder.de" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">michaelninder.de</a>
+		)
         {{ __('content.from') }}
-        <a href="https://europehost.eu" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
-            EuropeHost.eu
-        </a> 
+        <a href="https://europehost.eu" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">EuropeHost.eu</a> 
         {{ __('content.by') }}
-        <a href="https://xpsystems.eu" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">
-            xpsystems.eu
-        </a> 
+        <a href="https://xpsystems.eu" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-500">xpsystems.eu</a> 
         — All Rights Reserved.
     </p>
 
