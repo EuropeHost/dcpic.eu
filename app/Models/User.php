@@ -21,6 +21,17 @@ class User extends Authenticatable
         'remember_token',
     ];
 	
+	protected $keyType = 'string';
+	public $incrementing = false;
+	
+	protected static function boot()
+	{
+	    parent::boot();
+	    static::creating(function ($model) {
+	        $model->id = (string) Str::uuid();
+	    });
+	}
+	
 	public function images()
 	{
 	    return $this->hasMany(Image::class);
