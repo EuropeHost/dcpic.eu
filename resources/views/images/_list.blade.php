@@ -19,6 +19,7 @@
                             <source src="{{ $viewRoute }}" type="{{ $image->mime }}">
                             {{ __('content.video_not_supported') }}
                         </video>
+                        {{-- Play icon overlay REMOVED --}}
                     @else
                         <img src="{{ $viewRoute }}"
                              alt="{{ $image->original_name }}"
@@ -27,6 +28,7 @@
                 </div>
 
                 <div class="p-3 flex flex-col flex-grow">
+                    {{-- Image Name (truncated with full name on hover) --}}
                     <div class="text-sm font-medium text-gray-800 truncate mb-2" title="{{ $image->original_name }}">
                         {{ $image->original_name }}
                     </div>
@@ -130,7 +132,7 @@
     </div>
 
     <div class="mt-8 flex justify-center">
-        {{ $images->links() }}
+        {{ $images->links('vendor.pagination.images') }}
     </div>
 @else
     <p class="text-gray-500 text-center py-8">{{ __('content.no_images_yet') }}</p>
