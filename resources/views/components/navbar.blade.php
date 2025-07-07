@@ -1,6 +1,6 @@
 <nav class="bg-white shadow-md px-4 py-3 flex justify-between items-center">
     <a href="{{ route('home') }}" class="text-lg font-bold text-blue-600 hover:text-sky-600">
-        DCPic.eu
+        {{ env('APP_NAME') }}
     </a>
 
     <div class="flex items-center space-x-4">
