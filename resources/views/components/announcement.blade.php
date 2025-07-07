@@ -39,7 +39,7 @@ $announcements = [
 
 @foreach ($announcements as $announcement)
     @if (!session()->has("announcement_dismissed_{$announcement['id']}"))
-        <div class="w-full {{ $bgColors[$announcement['type']] ?? 'bg-gray-100 text-gray-800' }} border-b text-sm px-4 py-2 flex items-center justify-center gap-2 font-medium shadow-sm z-50 relative">
+        <!--div class="w-full {{ $bgColors[$announcement['type']] ?? 'bg-gray-100 text-gray-800' }} border-b text-sm px-4 py-2 flex items-center justify-center gap-2 font-medium shadow-sm z-50 relative">
             @if (!empty($announcement['title']))
                 <span class="hidden sm:inline">{{ $announcement['title'] }}</span>
             @endif
@@ -56,6 +56,6 @@ $announcements = [
                 @csrf
                 <button type="submit" class="text-sm text-gray-600 hover:text-gray-800 transition">&times;</button>
             </form>
-        </div>
+        </div->
     @endif
 @endforeach
