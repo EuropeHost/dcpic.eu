@@ -28,8 +28,11 @@ class User extends Authenticatable
 	protected static function boot()
 	{
 	    parent::boot();
+	
 	    static::creating(function ($model) {
-	        $model->id = (string) Str::uuid();
+	        if (empty($model->id)) {
+	            $model->id = (string) Str::uuid();
+	        }
 	    });
 	}
 	
