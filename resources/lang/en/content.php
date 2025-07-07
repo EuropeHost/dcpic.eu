@@ -42,4 +42,5 @@ return [
 	'link_copied' => 'Link Copied to clipboard',
 	'storage_overview' => 'Storage Overview',
 	'average_per_user' => 'Average per User',
+	'choose_file' => 'Choose File',
 ];
