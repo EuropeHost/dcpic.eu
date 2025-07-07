@@ -66,7 +66,7 @@
                 @endforeach
             </div>
             <div class="mt-8 flex justify-center">
-                {{ $userImages->links() }}
+                {{ $userImages->links('vendor.pagination.images') }}
             </div>
         @else
             <p class="text-gray-600">{{ __('admin.no_user_images') }}</p>
