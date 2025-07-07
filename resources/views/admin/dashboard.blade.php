@@ -135,9 +135,9 @@
                     <template x-for="user in filteredUsers" :key="user.id">
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                {{-- Wrapped avatar and name/email in a link --}}
                                 <a :href="'{{ route('admin.users.show', ':userId') }}'.replace(':userId', user.id)" class="flex items-center group">
                                     <div class="flex-shrink-0 h-10 w-10">
+                                        {{-- CORRECTED: Removed duplicate img tag. Using :src from Alpine.js --}}
                                         <img class="h-10 w-10 rounded-full object-cover group-hover:ring-2 group-hover:ring-sky-500 transition" :src="user.avatar_url || '{{ asset('img/default-avatar.png') }}'" :alt="user.name">
                                     </div>
                                     <div class="ml-4">
