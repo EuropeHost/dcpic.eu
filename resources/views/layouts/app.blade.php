@@ -10,8 +10,8 @@
 
     <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-	
-    <!-- Custom CSS -->
+
+	<!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/discord-login-btn.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/preloader.css') }}">
 </head>
@@ -20,9 +20,9 @@
 	<div id="preloader">
 	    <div class="spinner"></div>
 	</div>
-	
+
     @include('components.announcement')
-	
+
     @include('components.navbar')
 
     <main class="flex-grow container mx-auto p-4">
@@ -31,7 +31,7 @@
     </main>
 
     @include('components.footer')
-	
+
 	<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 	<script>
 	    window.addEventListener('load', () => {
@@ -41,5 +41,8 @@
 	        }
 	    });
 	</script>
+
+    @stack('scripts')
+
 </body>
 </html>
