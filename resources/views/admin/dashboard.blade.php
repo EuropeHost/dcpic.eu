@@ -19,10 +19,10 @@
             <p class="text-4xl font-bold text-sky-600 mt-2">
                 {{ number_format($totalStorageUsedMB, 2) }} MB
             </p>
-            <div class="w-full bg-gray-200 rounded-full h-3 mt-4">
+            <!--div class="w-full bg-gray-200 rounded-full h-3 mt-4">
                 <div class="bg-sky-600 h-3 rounded-full" style="width: {{ number_format($systemStoragePercentage, 1) }}%"></div>
             </div>
-            <p class="text-sm text-gray-600 mt-1">{{ number_format($systemStoragePercentage, 1) }}% {{ __('admin.of_total_limit') }}</p>
+            <p class="text-sm text-gray-600 mt-1">{{ number_format($systemStoragePercentage, 1) }}% {{ __('admin.of_total_limit') }}</p-->
         </div>
     </div>
 
