@@ -54,7 +54,7 @@ class AdminController extends Controller
     {
         $user->loadCount('images')->loadSum('images', 'size');
 
-        $userImages = $user->images()->latest()->paginate(10);
+        $userImages = $user->images()->latest()->paginate(12);
 
         $avatarUrl = asset('img/default-avatar.png');
         if ($user->discord_id && $user->avatar) {
