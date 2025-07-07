@@ -1,4 +1,4 @@
-# dcpics.eu / dsc.pics
+# dcpic.eu / dsc.pics
 ## FREE Laravel Discord Image and Video(mp4) Host Source
 ---
 you have to run `php artisan storage:link` to be able to use the internal storage as in the public/storage folder
