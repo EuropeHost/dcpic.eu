@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 return new class extends Migration {
     public function up(): void
     {
+		/*
         // Add uuid column to users
         Schema::table('users', function (Blueprint $table) {
             $table->uuid('uuid')->unique()->nullable()->after('id');
@@ -35,10 +36,12 @@ return new class extends Migration {
                   'user_uuid' => $user->uuid ?? null
               ]);
         });
+		*/
     }
 
     public function down(): void
     {
+		/*
         Schema::table('images', function (Blueprint $table) {
             $table->dropColumn(['uuid', 'user_uuid']);
         });
@@ -46,5 +49,6 @@ return new class extends Migration {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('uuid');
         });
+		*/
     }
 };
