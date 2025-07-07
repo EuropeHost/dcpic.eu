@@ -56,7 +56,7 @@ class AuthController extends Controller
 	    $user = User::updateOrCreate(
 	        ['discord_id' => $discordUser['id']],
 	        [
-	            'id' => Str::uuid()
+	            'id' => Str::uuid(),
 	            'name' => $discordUser['username'],
 	            'email' => $discordUser['email'] ?? null,
 	            'avatar' => $discordUser['avatar'],
