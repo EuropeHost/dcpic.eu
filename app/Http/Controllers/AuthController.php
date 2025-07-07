@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -55,6 +56,7 @@ class AuthController extends Controller
 	    $user = User::updateOrCreate(
 	        ['discord_id' => $discordUser['id']],
 	        [
+	            'id' => Str::uuid()
 	            'name' => $discordUser['username'],
 	            'email' => $discordUser['email'] ?? null,
 	            'avatar' => $discordUser['avatar'],
