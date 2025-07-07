@@ -55,7 +55,7 @@
                                 {{ $image->original_name }}
                             </div>
                             <div class="flex-grow"></div>
-                            <div class="grid grid-cols-1 gap-2 text-sm mt-2"> {{-- Simplified actions for insights --}}
+                            <div class="grid grid-cols-1 gap-2 text-sm mt-2">
                                 <a href="{{ $viewRoute }}" target="_blank"
                                    class="inline-flex items-center justify-center p-2 rounded-md bg-blue-50 text-blue-700 hover:bg-blue-100 transition">
                                     <i class="bi bi-eye mr-1"></i> {{ __('content.view') }}
