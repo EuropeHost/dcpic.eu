@@ -44,5 +44,3 @@ return [
     'average_per_user' => 'Durchschnitt pro Nutzer',
     'choose_file' => 'Datei auswählen',
 ];
-
-];
