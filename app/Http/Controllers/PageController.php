@@ -50,7 +50,7 @@ class PageController extends Controller
                 return (object) [
                     'name' => $user->name,
                     'avatar_url' => $avatarUrl,
-                    'image_count' => $user->image_count,
+                    'image_count' => $user->images_count,
                 ];
             });
 
