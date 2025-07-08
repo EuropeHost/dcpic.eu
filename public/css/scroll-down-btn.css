@@ -1,0 +1,17 @@
+.scroll-down-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    color: #fff;
+    background: linear-gradient(135deg, #5865f2, #7289da);
+    box-shadow: 0 4px 18px rgba(88, 101, 242, 0.45);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: bounceSlow 4s infinite;
+}
+.scroll-down-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(88, 101, 242, 0.65);
+}
