@@ -21,7 +21,7 @@ class PageController extends Controller
         // --- Top Users by Storage ---
         $topStorageUsers = User::withSum('images', 'size')
             ->orderByDesc('images_sum_size')
-            ->take(3)
+            ->take(2)
             ->get()
             ->map(function ($user) {
                 // Determine avatar URL or use a fallback
@@ -39,7 +39,7 @@ class PageController extends Controller
         // --- Top Users by Image Count ---
         $topImageUsers = User::withCount('images')
             ->orderByDesc('images_count')
-            ->take(3)
+            ->take(4)
             ->get()
             ->map(function ($user) {
                 // Determine avatar URL or use a fallback
@@ -50,7 +50,7 @@ class PageController extends Controller
                 return (object) [
                     'name' => $user->name,
                     'avatar_url' => $avatarUrl,
-                    'image_count' => $user->images_count,
+                    'image_count' => $user->image_count,
                 ];
             });
 
