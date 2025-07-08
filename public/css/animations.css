@@ -1,0 +1,44 @@
+@keyframes pulseFast {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0.6;
+    }
+}
+@keyframes bounceSlow {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.animate-pulse-fast {
+    animation: pulseFast 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce-slow {
+    animation: bounceSlow 6s ease-in-out infinite;
+}
+
+/* Custom Slide Up for JS Triggered Animations */
+@keyframes slideUpCustom {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up-custom {
+    animation: slideUpCustom 0.8s ease-out forwards;
+}
