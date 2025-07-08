@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @yield('main')
+	<div class="container mx-auto p-4">
+    	@yield('main')
+	</div>
 @endsection
