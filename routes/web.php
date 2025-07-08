@@ -28,10 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/images/{image}', [ImageController::class, 'destroy'])->name('images.destroy');
 	Route::patch('/images/{image}/visibility', [ImageController::class, 'toggleVisibility'])->name('images.toggleVisibility');
 	
-	Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-        Route::get('/', [AdminController::class, 'index'])->name('overview');
-		Route::get('/users/{user}', [AdminController::class, 'showUser'])->name('users.show');
+        Route::get('/users/{user}', [AdminController::class, 'showUser'])->name('users.show');
+        Route::patch('/users/{user}/role', [AdminController::class, 'updateRole'])->name('users.update_role');
+        Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
     });
 });
 
