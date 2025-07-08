@@ -132,7 +132,7 @@
     </div>
 
     <div class="mt-8 flex justify-center">
-        {{ $images->links('vendor.pagination.images') }}
+        {{ $images->links('components.custom-pagination') }}
     </div>
 @else
     <p class="text-gray-500 text-center py-8">{{ __('content.no_images_yet') }}</p>
