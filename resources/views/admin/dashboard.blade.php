@@ -133,16 +133,21 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     <template x-for="user in filteredUsers" :key="user.id">
-                        <tr>
+                        <tr x-data="{ emailHover: false }"> {{-- Added x-data for email hover state --}}
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <a :href="'{{ route('admin.users.show', ':userId') }}'.replace(':userId', user.id)" class="flex items-center group">
                                     <div class="flex-shrink-0 h-10 w-10">
-                                        {{-- CORRECTED: Removed duplicate img tag. Using :src from Alpine.js --}}
                                         <img class="h-10 w-10 rounded-full object-cover group-hover:ring-2 group-hover:ring-sky-500 transition" :src="user.avatar_url || '{{ asset('img/default-avatar.png') }}'" :alt="user.name">
                                     </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-medium text-gray-900 group-hover:text-sky-600 transition" x-text="user.name"></div>
-                                        <div class="text-sm text-gray-500" x-text="user.email"></div>
+                                        <div
+                                            class="text-sm text-gray-500 transition-all duration-300"
+                                            :class="{ 'filter blur-sm': !emailHover }"
+                                            @mouseenter="emailHover = true"
+                                            @mouseleave="emailHover = false"
+                                            x-text="user.email">
+                                        </div>
                                     </div>
                                 </a>
                             </td>
@@ -169,6 +174,5 @@
         <div class="mt-4">
             {{ $users->links() }}
         </div>
-
     </div>
 @endsection
