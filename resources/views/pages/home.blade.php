@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('content')
     <section
@@ -86,12 +86,8 @@
             @endguest
         </div>
 
-        <div
-            x-show="show"
-            x-transition.delay.600ms.duration.800ms
-            class="relative z-10 mt-16 grid grid-cols-1 gap-6 px-6
-                   sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <!--div x-show="show" x-transition.delay.600ms.duration.800ms class="relative z-10 mt-16 grid grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-3"-->
+        <div x-show="show" x-transition.delay.600ms.duration.800ms class="relative z-10 mt-16 grid grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-2">
             <div class="feature-card">
                 <i class="bi bi-lightning-fill text-3xl text-yellow-400"></i>
                 <div>
@@ -101,7 +97,7 @@
                     </p>
                 </div>
             </div>
-            <div class="feature-card">
+            <!--div class="feature-card">
                 <i class="bi bi-shield-lock-fill text-3xl text-teal-400"></i>
                 <div>
                     <p class="font-bold">
@@ -111,7 +107,7 @@
                         {{ __('features.secure_desc') }}
                     </p>
                 </div>
-            </div>
+            </div-->
             <div class="feature-card sm:col-span-2 lg:col-span-1">
                 <i class="bi bi-discord text-3xl text-indigo-400"></i>
                 <div>
@@ -263,9 +259,7 @@
             </div>
         </div>
 
-        <div
-            class="stat-card mx-auto mt-12 max-w-6xl bg-white border shadow-lg rounded-xl p-8 transform transition duration-300"
-        >
+		<div class="stat-card mx-auto mt-12 max-w-8xl bg-white border shadow-lg rounded-xl p-8 transform transition duration-300">
             <h2 class="mb-4 text-2xl font-bold text-gray-800 mb-4">{{ __('content.top_image_users') }}</h2>
             @if ($topImageUsers->isNotEmpty())
                 <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
