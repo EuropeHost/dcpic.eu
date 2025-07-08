@@ -32,7 +32,7 @@ class PageController extends Controller
                 return (object) [
                     'name' => $user->name,
                     'avatar_url' => $avatarUrl,
-                    'storage_used_mb' => number_format($user->images_sum_size / 1048576, 2), // Bytes to MB
+                    'storage_used_mb' => number_format($user->images_sum_size / 1048576, 2),
                 ];
             });
 
