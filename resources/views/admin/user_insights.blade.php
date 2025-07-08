@@ -1,17 +1,35 @@
 @extends('layouts.main')
 
 @section('main')
-    <div class="bg-white shadow rounded-lg p-8 mb-6">
+    <div class="bg-white shadow rounded-lg p-8 mb-6" x-data="{
+        emailHover: false,
+        showRoleModal: false,
+        newRole: '{{ $user->role }}',
+        showDeleteUserModal: false,
+    }">
         <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ __('admin.user_details') }}</h1>
 
-        <div class="flex items-center mb-6">
-            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-20 h-20 rounded-full object-cover border-4 border-sky-400 mr-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center mb-6 bg-gray-50 p-4 rounded-lg border">
+            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-24 h-24 rounded-full object-cover border-4 border-sky-400 mr-6 mb-4 sm:mb-0">
             <div>
-                <h2 class="text-2xl font-semibold text-gray-900">{{ $user->name }}</h2>
-                <p class="text-md text-gray-600">{{ $user->email }}</p>
-                <p class="text-md text-gray-600">Discord ID: {{ $user->discord_id }}</p>
-                <p class="text-md text-gray-600 capitalize">Role: <span class="font-bold">{{ $user->role }}</span></p>
-                <p class="text-md text-gray-600">{{ __('admin.account_created_on') }}: {{ $user->created_at->format('M d, Y') }}</p>
+                <h2 class="text-2xl font-semibold text-gray-900 mb-1">{{ $user->name }}</h2>
+                <p
+                    class="text-md text-gray-600 transition-all duration-300 mb-1"
+                    :class="{ 'filter blur-sm': !emailHover }"
+                    @mouseenter="emailHover = true"
+                    @mouseleave="emailHover = false">
+                    {{ $user->email }}
+                </p>
+                <p class="text-md text-gray-600 mb-1">{{ __('admin.discord_id_label') }}: <span class="font-mono text-gray-800">{{ $user->discord_id }}</span></p>
+                <p class="text-md text-gray-600 capitalize">
+                    {{ __('admin.role') }}: <span class="font-bold text-sky-700">{{ $user->role }}</span>
+                    @if(auth()->user()->id !== $user->id)
+                        <button @click="showRoleModal = true" class="text-blue-500 hover:underline ml-2 text-sm focus:outline-none">
+                            <i class="bi bi-pencil-square"></i> {{ __('admin.change_role') }}
+                        </button>
+                    @endif
+                </p>
+                <p class="text-md text-gray-600">{{ __('admin.account_created_on') }}: {{ $user->created_at->format('M d, Y H:i') }}</p>
             </div>
         </div>
 
@@ -55,27 +73,106 @@
                                 {{ $image->original_name }}
                             </div>
                             <div class="flex-grow"></div>
-                            <div class="grid grid-cols-1 gap-2 text-sm mt-2">
+                            {{-- Image actions: View (left) and Delete (right) --}}
+                            <div class="flex justify-between items-center text-sm mt-2">
                                 <a href="{{ $viewRoute }}" target="_blank"
-                                   class="inline-flex items-center justify-center p-2 rounded-md bg-blue-50 text-blue-700 hover:bg-blue-100 transition">
+                                   class="inline-flex items-center p-2 rounded-md bg-blue-50 text-blue-700 hover:bg-blue-100 transition">
                                     <i class="bi bi-eye mr-1"></i> {{ __('content.view') }}
                                 </a>
+                                <form method="POST" action="{{ route('images.destroy', $image) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="inline-flex items-center p-2 rounded-md bg-red-50 text-red-700 hover:bg-red-100 transition">
+                                        <i class="bi bi-trash mr-1"></i> {{ __('content.delete') }}
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
             <div class="mt-8 flex justify-center">
-                {{ $userImages->links('vendor.pagination.images') }}
+                {{ $userImages->links('components.custom-pagination') }}
             </div>
         @else
             <p class="text-gray-600">{{ __('admin.no_user_images') }}</p>
         @endif
 
-        <div class="mt-8 text-right">
+        <div class="mt-8 flex justify-between items-center">
             <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
                 <i class="bi bi-arrow-left mr-2"></i> {{ __('admin.back_to_dashboard') }}
             </a>
+            @if(auth()->user()->id !== $user->id)
+                <button @click="showDeleteUserModal = true" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">
+                    <i class="bi bi-person-x mr-2"></i> {{ __('admin.delete_user') }}
+                </button>
+            @endif
+        </div>
+
+        {{-- Change Role Modal --}}
+        <div x-show="showRoleModal" x-cloak
+             class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 p-4"
+             @click.away="showRoleModal = false">
+            <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-8" x-data="{ emailHover: false }"> {{-- Added x-data for emailHover --}}
+                <h3 class="text-xl font-bold text-gray-800 mb-4">{{ __('admin.change_user_role') }}</h3>
+                <p
+                    class="mb-4 text-gray-600 transition-all duration-300"
+                    :class="{ 'filter blur-sm': !emailHover }"
+                    @mouseenter="emailHover = true"
+                    @mouseleave="emailHover = false">
+                    {{ $user->name }} ({{ $user->email }})
+                </p>
+
+                <form method="POST" action="{{ route('admin.users.update_role', $user) }}">
+                    @csrf
+                    @method('PATCH')
+                    <div class="mb-6">
+                        <label for="new_role" class="block text-sm font-medium text-gray-700 mb-1">{{ __('admin.select_new_role') }}</label>
+                        <select id="new_role" name="role" x-model="newRole" class="block w-full border-gray-300 rounded-md shadow-sm focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-50 px-4 py-2">
+                            <option value="user">{{ __('admin.role_user') }}</option>
+                            <option value="admin">{{ __('admin.role_admin') }}</option>
+                        </select>
+                    </div>
+
+                    <div class="flex justify-end space-x-3">
+                        <button @click="showRoleModal = false" type="button" class="px-5 py-2 bg-gray-200 rounded-lg text-gray-700 hover:bg-gray-300 transition">
+                            {{ __('content.cancel') }} {{-- Using content.cancel --}}
+                        </button>
+                        <button type="submit" class="px-5 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition">
+                            {{ __('admin.save_changes') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {{-- Delete User Confirmation Modal --}}
+        <div x-show="showDeleteUserModal" x-cloak
+             class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 p-4"
+             @click.away="showDeleteUserModal = false">
+            <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-8">
+                <h3 class="text-xl font-bold text-red-700 mb-4">{{ __('admin.confirm_delete_user') }}</h3>
+                <p
+                    class="mb-6 text-gray-600 transition-all duration-300"
+                    :class="{ 'filter blur-sm': !emailHover }"
+                    @mouseenter="emailHover = true"
+                    @mouseleave="emailHover = false">
+                    {{ __('admin.delete_user_warning', ['user_name' => $user->name]) }}
+                </p>
+
+                <div class="flex justify-end space-x-3">
+                    <button @click="showDeleteUserModal = false" type="button" class="px-5 py-2 bg-gray-200 rounded-lg text-gray-700 hover:bg-gray-300 transition">
+                        {{ __('content.cancel') }} {{-- Using content.cancel --}}
+                    </button>
+                    <form method="POST" action="{{ route('admin.users.destroy', $user) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                            {{ __('admin.delete_user_confirm') }}
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
