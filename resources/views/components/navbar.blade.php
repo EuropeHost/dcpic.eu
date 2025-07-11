@@ -32,12 +32,6 @@
                     <span>{{ __('content.recent_uploads') }}</span>
                 </a>
 			@if ($user->role === 'admin')
-				
-			    <a href="{{ route('admin.dashboard') }}"
-			        class="text-gray-700 hover:text-sky-600 font-medium flex items-center space-x-1">
-			        <i class="bi bi-speedometer"></i>
-			        <span>{{ __('admin.admin_dashboard') }}</span>
-			    </a>
 			@endif
             </div>
         @endauth
