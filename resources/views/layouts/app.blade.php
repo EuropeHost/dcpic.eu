@@ -34,7 +34,6 @@
         @include('components.navbar')
 
         <main class="flex-grow">
-            @include('components.alert')
             @yield('content')
         </main>
 
