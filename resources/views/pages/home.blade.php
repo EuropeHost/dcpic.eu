@@ -3,7 +3,7 @@
 @section('content')
     <section
         id="hero"
-        x-data="{ show:false }"
+        x-data="{ show: false }"
         x-init="
             const nav = document.querySelector('nav');
             const fit = () => {
@@ -20,22 +20,22 @@
         <canvas id="stars" class="absolute inset-0"></canvas>
 
         <span
-            class="absolute -top-40 -left-32 h-96 w-96 rounded-full
-                   bg-indigo-600 opacity-30 blur-3xl pointer-events-none
-                   animate-pulse-fast"
+            class="pointer-events-none absolute -left-32 -top-40 h-96 w-96
+                   animate-pulse-fast rounded-full bg-indigo-600 opacity-30
+                   blur-3xl"
         ></span>
         <span
-            class="absolute top-1/3 -right-24 h-80 w-80 rounded-full bg-sky-500
-                   opacity-40 mix-blend-lighten blur-2xl pointer-events-none
-                   animate-bounce-slow"
+            class="pointer-events-none absolute -right-24 top-1/3 h-80 w-80
+                   animate-bounce-slow rounded-full bg-sky-500 opacity-40
+                   mix-blend-lighten blur-2xl"
         ></span>
 
         <div class="relative z-10 px-6 text-center">
             <h1
                 x-show="show"
                 x-transition.duration.800ms
-                class="text-5xl sm:text-6xl md:text-7xl font-extrabold
-                       tracking-tight text-white drop-shadow-xl"
+                class="text-5xl font-extrabold tracking-tight text-white
+                       drop-shadow-xl sm:text-6xl md:text-7xl"
             >
                 {!! __('content.home_title') !!}
             </h1>
@@ -43,8 +43,8 @@
             <p
                 x-show="show"
                 x-transition.delay.200ms.duration.800ms
-                class="mx-auto mt-6 max-w-3xl text-xl sm:text-2xl md:text-3xl
-                       text-white/90"
+                class="mx-auto mt-6 max-w-3xl text-xl text-white/90 sm:text-2xl
+                       md:text-3xl"
             >
                 {!! __('content.home_subtitle') !!}
             </p>
@@ -56,7 +56,7 @@
                     href="{{ route('login') }}"
                     class="discord-login-btn group relative mt-12 inline-flex
                            items-center justify-center gap-3 rounded-xl px-8
-                           py-4 text-base sm:text-lg font-semibold text-white"
+                           py-4 text-base font-semibold text-white sm:text-lg"
                 >
                     <span
                         class="absolute inset-0 rounded-xl bg-gradient-to-r
@@ -73,7 +73,7 @@
                     href="{{ route('dashboard') }}"
                     class="discord-login-btn group relative mt-12 inline-flex
                            items-center justify-center gap-3 rounded-xl px-8
-                           py-4 text-base sm:text-lg font-semibold text-white"
+                           py-4 text-base font-semibold text-white sm:text-lg"
                 >
                     <span
                         class="absolute inset-0 rounded-xl bg-gradient-to-r
@@ -86,8 +86,11 @@
             @endguest
         </div>
 
-        <!--div x-show="show" x-transition.delay.600ms.duration.800ms class="relative z-10 mt-16 grid grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-3"-->
-        <div x-show="show" x-transition.delay.600ms.duration.800ms class="relative z-10 mt-16 grid grid-cols-1 gap-6 px-6 sm:grid-cols-2 lg:grid-cols-2">
+        <div
+            x-show="show"
+            x-transition.delay.600ms.duration.800ms
+            class="relative z-10 mt-16 grid grid-cols-1 gap-6 px-6 sm:grid-cols-2"
+        >
             <div class="feature-card">
                 <i class="bi bi-lightning-fill text-3xl text-yellow-400"></i>
                 <div>
@@ -97,17 +100,6 @@
                     </p>
                 </div>
             </div>
-            <!--div class="feature-card">
-                <i class="bi bi-shield-lock-fill text-3xl text-teal-400"></i>
-                <div>
-                    <p class="font-bold">
-                        {{ __('features.secure_title') }}
-                    </p>
-                    <p class="text-sm opacity-80">
-                        {{ __('features.secure_desc') }}
-                    </p>
-                </div>
-            </div-->
             <div class="feature-card sm:col-span-2 lg:col-span-1">
                 <i class="bi bi-discord text-3xl text-indigo-400"></i>
                 <div>
@@ -121,22 +113,25 @@
             </div>
         </div>
 
-		<div class="absolute bottom-10 left-1/2 -translate-x-1/2">
-		    <a href="#stats" class="scroll-down-btn">
-		        <i class="bi bi-chevron-double-down text-3xl"></i>
-		    </a>
-		</div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2">
+            <a href="#stats" class="scroll-down-btn">
+                <i class="bi bi-chevron-double-down text-3xl"></i>
+            </a>
+        </div>
     </section>
 
-    <div
+    <section
         id="stats"
-        class="home mx-auto mt-12 max-w-6xl px-4 py-12 text-center"
+        class="home mx-auto flex min-h-screen w-full max-w-7xl flex-col
+               items-center justify-center px-4 py-24"
     >
-        <div
-            class="mx-auto grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-        >
-            <div class="stat-card bg-white border shadow-lg rounded-xl p-8 flex flex-col justify-between transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                <div>
+        <div class="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div
+                class="stat-card flex transform flex-col justify-between rounded-xl
+                       border bg-white p-8 shadow-lg transition duration-300
+                       hover:scale-105 hover:shadow-xl"
+            >
+                <div class="text-center">
                     <h2 class="mb-4 text-2xl font-bold text-gray-800">
                         {{ __('content.storage_overview') }}
                     </h2>
@@ -173,7 +168,7 @@
                         % {{ __('content.used') }})
                     </p>
                 </div>
-                <div class="mt-6 border-t border-gray-200 pt-4">
+                <div class="mt-6 border-t border-gray-200 pt-4 text-center">
                     <p class="text-md text-gray-700">
                         <strong>{{ __('content.average_per_user') }}:</strong>
                         <span
@@ -187,8 +182,12 @@
                 </div>
             </div>
 
-            <div class="stat-card bg-white border shadow-lg rounded-xl p-8 flex flex-col justify-between transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                <div>
+            <div
+                class="stat-card flex transform flex-col justify-between rounded-xl
+                       border bg-white p-8 shadow-lg transition duration-300
+                       hover:scale-105 hover:shadow-xl"
+            >
+                <div class="text-center">
                     <h2 class="mb-4 text-2xl font-bold text-gray-800">
                         {{ __('content.general_stats') }}
                     </h2>
@@ -213,29 +212,46 @@
                         ></span>
                     </p>
                 </div>
-                <div class="mt-6 border-t border-gray-200 pt-4">
+                <div class="mt-6 border-t border-gray-200 pt-4 text-center">
                     <p class="text-sm italic text-gray-500">
                         {{ __('content.stats_update_info') }}
                     </p>
                 </div>
             </div>
 
-            <div class="stat-card bg-white border shadow-lg rounded-xl p-8 transform transition duration-300 hover:scale-105 hover:shadow-xl md:col-span-2 lg:col-span-1">
-                <h2 class="mb-4 text-2xl font-bold text-gray-800 mb-4">{{ __('content.top_storage_users') }}</h2>
+            <div
+                class="stat-card transform rounded-xl border bg-white p-8 shadow-lg
+                       transition duration-300 hover:scale-105 hover:shadow-xl
+                       md:col-span-2 lg:col-span-1"
+            >
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800">
+                    {{ __('content.top_storage_users') }}
+                </h2>
                 @if ($topStorageUsers->isNotEmpty())
                     <ul class="space-y-3">
                         @foreach ($topStorageUsers as $index => $user)
-                            <li class="user-item flex items-center space-x-3 bg-gray-50 p-2 rounded-lg transform transition duration-200 hover:scale-[1.02] hover:bg-gray-100 hover:shadow-sm cursor-pointer">
-                                <div class="rank w-8 h-8 flex items-center justify-center text-lg font-bold text-sky-600 bg-sky-100 rounded-full flex-shrink-0">
+                            <li
+                                class="user-item flex items-center space-x-3
+                                       rounded-lg bg-gray-50 p-2 transition
+                                       duration-200 hover:scale-[1.02]
+                                       hover:bg-gray-100 hover:shadow-sm"
+                            >
+                                <div
+                                    class="rank flex h-8 w-8 flex-shrink-0
+                                           items-center justify-center
+                                           rounded-full bg-sky-100 text-lg
+                                           font-bold text-sky-600"
+                                >
                                     {{ $index + 1 }}
                                 </div>
                                 <img
                                     src="{{ $user->avatar_url }}"
                                     alt="{{ $user->name }}"
-                                    class="avatar w-10 h-10 rounded-full object-cover border-2 border-sky-400"
-                                >
-                                <div class="flex-grow">
-                                    <p class="font-semibold text-gray-800">
+                                    class="avatar h-10 w-10 rounded-full
+                                           border-2 border-sky-400 object-cover"
+                                />
+                                <div class="min-w-0 flex-grow text-left">
+                                    <p class="truncate font-semibold text-gray-800">
                                         {{ $user->name }}
                                     </p>
                                     <p class="text-sm text-gray-600">
@@ -252,29 +268,47 @@
                         @endforeach
                     </ul>
                 @else
-                    <p class="text-gray-600">
+                    <p class="text-center text-gray-600">
                         {{ __('content.no_top_storage_users') }}
                     </p>
                 @endif
             </div>
         </div>
 
-		<div class="stat-card mx-auto mt-12 max-w-8xl bg-white border shadow-lg rounded-xl p-8 transform transition duration-300">
-            <h2 class="mb-4 text-2xl font-bold text-gray-800 mb-4">{{ __('content.top_image_users') }}</h2>
+        <div
+            class="stat-card mx-auto mt-12 w-full transform rounded-xl border
+                   bg-white p-8 shadow-lg transition duration-300"
+        >
+            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800">
+                {{ __('content.top_image_users') }}
+            </h2>
             @if ($topImageUsers->isNotEmpty())
-                <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <ul
+                    class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"
+                >
                     @foreach ($topImageUsers as $index => $user)
-                        <li class="user-item flex items-center space-x-3 bg-gray-50 p-2 rounded-lg transform transition duration-200 hover:scale-[1.02] hover:bg-gray-100 hover:shadow-sm cursor-pointer">
-                            <div class="rank w-8 h-8 flex items-center justify-center text-lg font-bold text-sky-600 bg-sky-100 rounded-full flex-shrink-0">
+                        <li
+                            class="user-item flex items-center space-x-3
+                                   rounded-lg bg-gray-50 p-2 transition
+                                   duration-200 hover:scale-[1.02]
+                                   hover:bg-gray-100 hover:shadow-sm"
+                        >
+                            <div
+                                class="rank flex h-8 w-8 flex-shrink-0
+                                       items-center justify-center rounded-full
+                                       bg-sky-100 text-lg font-bold
+                                       text-sky-600"
+                            >
                                 {{ $index + 1 }}
                             </div>
                             <img
                                 src="{{ $user->avatar_url }}"
                                 alt="{{ $user->name }}"
-                                class="w-10 h-10 rounded-full object-cover border-2 border-sky-400"
-                            >
-                            <div class="flex-grow">
-                                <p class="font-semibold text-gray-800">
+                                class="h-10 w-10 rounded-full border-2
+                                       border-sky-400 object-cover"
+                            />
+                            <div class="min-w-0 flex-grow text-left">
+                                <p class="truncate font-semibold text-gray-800">
                                     {{ $user->name }}
                                 </p>
                                 <p class="text-sm text-gray-600">
@@ -291,12 +325,12 @@
                     @endforeach
                 </ul>
             @else
-                <p class="text-gray-600">
+                <p class="text-center text-gray-600">
                     {{ __('content.no_top_image_users') }}
                 </p>
             @endif
         </div>
-    </div>
+    </section>
 
     @push('scripts')
         <script>
