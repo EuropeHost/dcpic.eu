@@ -400,22 +400,52 @@
                     });
             };
 
+            const setupStatAnimations = () => {
+                const statsSection = document.getElementById('stats');
+                if (!statsSection) return;
+
+                const observer = new IntersectionObserver(
+                    (entries, observer) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                document
+                                    .querySelectorAll('.animated-count')
+                                    .forEach((el) => animateCount(el));
+
+                                document
+                                    .querySelectorAll('.stat-card')
+                                    .forEach((card, index) => {
+                                        card.style.animationDelay = `${0.1 * index}s`;
+                                        card.classList.add(
+                                            'animate-slide-up-custom'
+                                        );
+                                    });
+
+                                document
+                                    .querySelectorAll('.user-item')
+                                    .forEach((item, index) => {
+                                        item.style.animationDelay = `${0.05 * index}s`;
+                                        item.classList.add(
+                                            'animate-slide-up-custom'
+                                        );
+                                    });
+
+                                observer.unobserve(statsSection);
+                            }
+                        });
+                    },
+                    { threshold: 0.1 }
+                );
+
+                observer.observe(statsSection);
+            };
+
             window.addEventListener('preloader:done', () => {
-                document
-                    .querySelectorAll('.animated-count')
-                    .forEach((el) => animateCount(el));
                 stars();
                 document.addEventListener('pointermove', tilt, {
                     passive: true
                 });
-                document.querySelectorAll('.stat-card').forEach((card, index) => {
-                    card.style.animationDelay = `${0.1 * index}s`;
-                    card.classList.add('animate-slide-up-custom');
-                });
-                document.querySelectorAll('.user-item').forEach((item, index) => {
-                    item.style.animationDelay = `${0.05 * index}s`;
-                    item.classList.add('animate-slide-up-custom');
-                });
+                setupStatAnimations();
             });
 
             window.addEventListener('load', () => {
