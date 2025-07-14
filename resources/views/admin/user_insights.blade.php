@@ -6,6 +6,7 @@
         showRoleModal: false,
         newRole: '{{ $user->role }}',
         showDeleteUserModal: false,
+        modalEmailHover: false // New state for modal email blur
     }">
         <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ __('admin.user_details') }}</h1>
 
@@ -73,7 +74,6 @@
                                 {{ $image->original_name }}
                             </div>
                             <div class="flex-grow"></div>
-                            {{-- Image actions: View (left) and Delete (right) --}}
                             <div class="flex justify-between items-center text-sm mt-2">
                                 <a href="{{ $viewRoute }}" target="_blank"
                                    class="inline-flex items-center p-2 rounded-md bg-blue-50 text-blue-700 hover:bg-blue-100 transition">
@@ -109,18 +109,18 @@
             @endif
         </div>
 
-        {{-- Change Role Modal --}}
         <div x-show="showRoleModal" x-cloak
              class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 p-4"
              @click.away="showRoleModal = false">
-            <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-8" x-data="{ emailHover: false }"> {{-- Added x-data for emailHover --}}
+            <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-8" x-data="{ modalEmailHover: false }">
                 <h3 class="text-xl font-bold text-gray-800 mb-4">{{ __('admin.change_user_role') }}</h3>
-                <p
-                    class="mb-4 text-gray-600 transition-all duration-300"
-                    :class="{ 'filter blur-sm': !emailHover }"
-                    @mouseenter="emailHover = true"
-                    @mouseleave="emailHover = false">
-                    {{ $user->name }} ({{ $user->email }})
+                <p class="mb-4 text-gray-600">
+                    {{ $user->name }} (<span
+                        class="transition-all duration-300"
+                        :class="{ 'filter blur-sm': !modalEmailHover }"
+                        @mouseenter="modalEmailHover = true"
+                        @mouseleave="modalEmailHover = false"
+                    >{{ $user->email }}</span>)
                 </p>
 
                 <form method="POST" action="{{ route('admin.users.update_role', $user) }}">
@@ -136,7 +136,7 @@
 
                     <div class="flex justify-end space-x-3">
                         <button @click="showRoleModal = false" type="button" class="px-5 py-2 bg-gray-200 rounded-lg text-gray-700 hover:bg-gray-300 transition">
-                            {{ __('content.cancel') }} {{-- Using content.cancel --}}
+                            {{ __('content.cancel') }}
                         </button>
                         <button type="submit" class="px-5 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition">
                             {{ __('admin.save_changes') }}
@@ -146,23 +146,23 @@
             </div>
         </div>
 
-        {{-- Delete User Confirmation Modal --}}
         <div x-show="showDeleteUserModal" x-cloak
              class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 p-4"
              @click.away="showDeleteUserModal = false">
-            <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-8">
+            <div class="bg-white rounded-xl shadow-2xl max-w-sm w-full p-8" x-data="{ modalEmailHover: false }">
                 <h3 class="text-xl font-bold text-red-700 mb-4">{{ __('admin.confirm_delete_user') }}</h3>
-                <p
-                    class="mb-6 text-gray-600 transition-all duration-300"
-                    :class="{ 'filter blur-sm': !emailHover }"
-                    @mouseenter="emailHover = true"
-                    @mouseleave="emailHover = false">
-                    {{ __('admin.delete_user_warning', ['user_name' => $user->name]) }}
+                <p class="mb-6 text-gray-600">
+                    {{ __('admin.delete_user_warning', ['user_name' => $user->name]) }} (<span
+                        class="transition-all duration-300"
+                        :class="{ 'filter blur-sm': !modalEmailHover }"
+                        @mouseenter="modalEmailHover = true"
+                        @mouseleave="modalEmailHover = false"
+                    >{{ $user->email }}</span>)
                 </p>
 
                 <div class="flex justify-end space-x-3">
                     <button @click="showDeleteUserModal = false" type="button" class="px-5 py-2 bg-gray-200 rounded-lg text-gray-700 hover:bg-gray-300 transition">
-                        {{ __('content.cancel') }} {{-- Using content.cancel --}}
+                        {{ __('content.cancel') }}
                     </button>
                     <form method="POST" action="{{ route('admin.users.destroy', $user) }}">
                         @csrf
