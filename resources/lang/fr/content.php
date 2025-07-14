@@ -52,4 +52,5 @@ return [
     'images' => 'images',
     'no_top_storage_users' => 'Aucun utilisateur en tête par stockage pour l\'instant.',
     'no_top_image_users' => 'Aucun utilisateur en tête par images pour l\'instant.',
+    'profile' => 'Profil',
 ];
