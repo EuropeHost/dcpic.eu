@@ -52,4 +52,5 @@ return [
     'images' => 'images',
     'no_top_storage_users' => 'No top storage users yet.',
     'no_top_image_users' => 'No top image users yet.',
+    'profile' => 'Profile',
 ];
