@@ -52,4 +52,5 @@ return [
     'images' => 'Bilder',
     'no_top_storage_users' => 'Noch keine Top-Nutzer nach Speicherverbrauch.',
     'no_top_image_users' => 'Noch keine Top-Nutzer nach Bildanzahl.',
+    'profile' => 'Profil',
 ];
