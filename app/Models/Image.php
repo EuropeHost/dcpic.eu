@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 class Image extends Model
 {
     protected $fillable = [
-        'user_id', 'filename', 'original_name', 'mime', 'size', 'is_public',
+        'user_id', 'filename', 'slug', 'original_name', 'mime', 'size', 'is_public',
     ];
 	
 	protected $keyType = 'string';
@@ -28,5 +28,10 @@ class Image extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+	
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
