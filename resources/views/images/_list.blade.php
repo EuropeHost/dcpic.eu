@@ -1,21 +1,18 @@
 @if($images->count())
-    {{-- Reverted grid columns to a max of 4 as per original request --}}
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         @foreach($images as $image)
-            @php
-                $viewRoute = Str::startsWith($image->mime, 'video/')
-                    ? route('vid.show', $image)
-                    : route('img.show', $image);
-            @endphp
+			@php
+    			$viewRoute = Str::startsWith($image->mime, 'video/')
+    			    ? route('vid.show.slug', $image)
+    			    : route('img.show.slug', $image)
+			@endphp
 
             <div x-data="{ showCopyModal: false, showDeleteModal: false, isOwner: {{ auth()->id() === $image->user_id ? 'true' : 'false' }} }"
                  class="group relative border rounded-lg shadow-sm bg-white overflow-hidden flex flex-col justify-between transition-all duration-200 hover:shadow-md">
 
-                {{-- Image/Video Preview Container --}}
-                {{-- Changed to aspect-video and object-contain to show whole media --}}
                 <div class="relative w-full aspect-video flex items-center justify-center bg-gray-100 rounded-t-lg">
                     @if(Str::startsWith($image->mime, 'video/'))
-                        <video controls class="absolute inset-0 w-full h-full object-contain rounded-t-lg"> {{-- object-contain for full video view --}}
+                        <video controls class="absolute inset-0 w-full h-full object-contain rounded-t-lg">
                             <source src="{{ $viewRoute }}" type="{{ $image->mime }}">
                             {{ __('content.video_not_supported') }}
                         </video>
@@ -23,7 +20,7 @@
                     @else
                         <img src="{{ $viewRoute }}"
                              alt="{{ $image->original_name }}"
-                             class="absolute inset-0 w-full h-full object-contain rounded-t-lg"> {{-- object-contain for full image view --}}
+                             class="absolute inset-0 w-full h-full object-contain rounded-t-lg">
                     @endif
                 </div>
 
