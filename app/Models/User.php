@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Image;
+use App\Models\Link;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
@@ -39,6 +40,11 @@ class User extends Authenticatable
 	public function images()
 	{
 	    return $this->hasMany(Image::class);
+	}
+	
+	public function links()
+	{
+	    return $this->hasMany(Link::class);
 	}
 	
 	public function getStorageUsedAttribute()
