@@ -53,4 +53,7 @@ return [
     'no_top_storage_users' => 'Aucun utilisateur en tête par stockage pour l\'instant.',
     'no_top_image_users' => 'Aucun utilisateur en tête par images pour l\'instant.',
     'profile' => 'Profil',
+    'total_links_created' => 'Total Liens Créés',
+    'top_link_users' => 'Top Utilisateurs par Liens',
+    'links' => 'liens',
 ];
