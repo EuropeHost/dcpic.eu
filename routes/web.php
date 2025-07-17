@@ -7,7 +7,8 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProfileController; // NEW: Import ProfileController
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LinkController;
 
 Route::post('/locale', function (Request $request) {
     session(['locale' => $request->locale]);
@@ -42,20 +43,30 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ProfileController::class, 'show'])->name('show');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
     });
+
+    //Link Management Routes
+    Route::prefix('links')->name('links.')->group(function () {
+        Route::get('/my', [LinkController::class, 'myLinks'])->name('my');
+        Route::post('/', [LinkController::class, 'store'])->name('store');
+        Route::delete('/{link}', [LinkController::class, 'destroy'])->name('destroy');
+    });
 });
 
+Route::get('/i/{image:slug}', [ImageController::class, 'show'])->name('img.show.slug');
+Route::get('/v/{image:slug}', [ImageController::class, 'show'])->name('vid.show.slug');
+Route::get('/l/{link:slug}', [LinkController::class, 'show'])->name('links.show');
 
-Route::get('/recent-uploads', [ImageController::class, 'recentUploads'])->name('images.recent');
+
 Route::get('/madia/{image}', [ImageController::class, 'show'])->name('images.show');
 Route::get('/images/{image}', [ImageController::class, 'show']);
-Route::get('/i/{image}', [ImageController::class, 'show']);
-Route::get('/v/{image}', [ImageController::class, 'show']);
 Route::get('/img/{image}', [ImageController::class, 'show'])->name('img.show');
 Route::get('/vid/{image}', [ImageController::class, 'show'])->name('vid.show');
 Route::get('/vdo/{image}', [ImageController::class, 'show']);
 Route::get('/image/{image}', [ImageController::class, 'show']);
 Route::get('/video/{image}', [ImageController::class, 'show']);
 Route::get('/media/{image}', [ImageController::class, 'show']);
+
+Route::get('/recent-uploads', [ImageController::class, 'recentUploads'])->name('images.recent');
 
 Route::get('/legal/{section}', [LegalController::class, 'show'])->name('legal.show');
 
