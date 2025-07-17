@@ -53,4 +53,7 @@ return [
     'no_top_storage_users' => 'No top storage users yet.',
     'no_top_image_users' => 'No top image users yet.',
     'profile' => 'Profile',
+    'total_links_created' => 'Total Links Shortened',
+    'top_link_users' => 'Top Users by Links',
+    'links' => 'links',
 ];
