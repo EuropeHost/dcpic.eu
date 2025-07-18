@@ -6,7 +6,7 @@
         showRoleModal: false,
         newRole: '{{ $user->role }}',
         showDeleteUserModal: false,
-        modalEmailHover: false // New state for modal email blur
+        modalEmailHover: false
     }">
         <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ __('admin.user_details') }}</h1>
 
@@ -43,6 +43,10 @@
                 <p class="text-lg font-semibold text-gray-700">{{ __('admin.storage_used') }}</p>
                 <p class="text-3xl font-bold text-sky-600 mt-1">{{ number_format($user->images_sum_size / 1024 / 1024, 2) }} MB</p>
             </div>
+            <div class="bg-gray-50 rounded-lg p-5 border">
+                <p class="text-lg font-semibold text-gray-700">{{ __('admin.links_shortened') }}</p>
+                <p class="text-3xl font-bold text-sky-600 mt-1">{{ number_format($user->links_count) }}</p>
+            </div>
         </div>
 
         <h3 class="text-2xl font-bold text-gray-800 mb-4">{{ __('admin.user_images') }}</h3>
@@ -51,8 +55,8 @@
                 @foreach($userImages as $image)
                     @php
                         $viewRoute = Str::startsWith($image->mime, 'video/')
-                            ? route('vid.show', $image)
-                            : route('img.show', $image);
+                            ? route('vid.show.slug', $image)
+                            : route('img.show.slug', $image);
                     @endphp
 
                     <div class="group relative border rounded-lg shadow-sm bg-white overflow-hidden flex flex-col justify-between transition-all duration-200 hover:shadow-md">
@@ -97,6 +101,51 @@
         @else
             <p class="text-gray-600">{{ __('admin.no_user_images') }}</p>
         @endif
+
+        <h3 class="text-2xl font-bold text-gray-800 mb-4 mt-8">{{ __('admin.user_links') }}</h3> {{-- New lang key --}}
+        @if($userLinks->isNotEmpty())
+            <div class="overflow-x-auto bg-white border rounded shadow mb-6">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('links.short_link') }}</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('links.original_link') }}</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('links.visits') }}</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __('links.actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach($userLinks as $link)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{ route('links.show', $link->slug) }}" target="_blank" class="text-sky-600 hover:underline">
+                                        {{ env('APP_URL') }}/l/{{ $link->slug }}
+                                    </a>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-500 truncate" title="{{ $link->original_url }}">
+                                    {{ $link->original_url }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($link->visits) }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <button onclick="navigator.clipboard.writeText('{{ route('links.show', $link->slug) }}')" class="text-blue-500 hover:text-blue-700 mr-3">{{ __('links.copy') }}</button>
+                                    <form action="{{ route('links.destroy', $link) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 hover:text-red-700">{{ __('links.delete') }}</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-8 flex justify-center">
+                {{ $userLinks->links('components.custom-pagination') }}
+            </div>
+        @else
+            <p class="text-gray-600 mb-6">{{ __('admin.no_user_links') }}</p> {{-- New lang key --}}
+        @endif
+
 
         <div class="mt-8 flex justify-between items-center">
             <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
