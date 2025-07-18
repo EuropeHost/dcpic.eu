@@ -3,7 +3,7 @@
 @section('main')
     <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ __('admin.admin_dashboard') }}</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div class="bg-white shadow rounded-lg p-6">
             <p class="text-lg font-semibold text-gray-700">{{ __('admin.total_users') }}</p>
             <p class="text-4xl font-bold text-sky-600 mt-2">{{ number_format($totalUsers) }}</p>
@@ -12,6 +12,11 @@
         <div class="bg-white shadow rounded-lg p-6">
             <p class="text-lg font-semibold text-gray-700">{{ __('admin.total_images') }}</p>
             <p class="text-4xl font-bold text-sky-600 mt-2">{{ number_format($totalImages) }}</p>
+        </div>
+
+        <div class="bg-white shadow rounded-lg p-6">
+            <p class="text-lg font-semibold text-gray-700">{{ __('admin.total_links') }}</p>
+            <p class="text-4xl font-bold text-sky-600 mt-2">{{ number_format($totalLinks) }}</p>
         </div>
 
         <div class="bg-white shadow rounded-lg p-6">
@@ -44,7 +49,7 @@
                 let aValue = a[this.sortBy];
                 let bValue = b[this.sortBy];
 
-                if (this.sortBy === 'images_count' || this.sortBy === 'images_sum_size') {
+                if (['images_count', 'images_sum_size', 'links_count'].includes(this.sortBy)) {
                     aValue = parseFloat(aValue || 0);
                     bValue = parseFloat(bValue || 0);
                 }
@@ -99,6 +104,7 @@
                 <option value="name">{{ __('admin.sort_by_name') }}</option>
                 <option value="images_count">{{ __('admin.sort_by_images') }}</option>
                 <option value="images_sum_size">{{ __('admin.sort_by_storage') }}</option>
+                <option value="links_count">{{ __('admin.sort_by_links') }}</option> {{-- NEW: Sort by links --}}
             </select>
 
             <button @click="sortDirection = sortDirection === 'asc' ? 'desc' : 'asc'; applyFilters()"
@@ -124,6 +130,9 @@
                             {{ __('admin.storage_used') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            {{ __('admin.links_shortened') }}
+                        </th> {{-- NEW: Links Shortened column header --}}
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             {{ __('admin.account_created_on') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -133,7 +142,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     <template x-for="user in filteredUsers" :key="user.id">
-                        <tr x-data="{ emailHover: false }"> {{-- Added x-data for email hover state --}}
+                        <tr x-data="{ emailHover: false }">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <a :href="'{{ route('admin.users.show', ':userId') }}'.replace(':userId', user.id)" class="flex items-center group">
                                     <div class="flex-shrink-0 h-10 w-10">
@@ -154,6 +163,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="user.role"></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="user.images_count"></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="formatBytes(user.images_sum_size)"></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="user.links_count"></td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="new Date(user.created_at).toLocaleDateString()"></td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a :href="'{{ route('admin.users.show', ':userId') }}'.replace(':userId', user.id)" class="text-sky-600 hover:text-sky-900">{{ __('admin.view_details') }}</a>
@@ -162,7 +172,7 @@
                     </template>
                     <template x-if="filteredUsers.length === 0">
                         <tr>
-                            <td colspan="6" class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
                                 {{ __('admin.no_users_found') }}
                             </td>
                         </tr>
