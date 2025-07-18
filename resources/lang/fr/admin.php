@@ -40,4 +40,9 @@ return [
     'role_updated_successfully' => 'Rôle pour :user_name mis à jour avec succès.',
     'cannot_delete_own_account' => 'Vous ne pouvez pas supprimer votre propre compte.',
     'user_deleted_successfully' => 'Utilisateur :user_name et toutes ses données supprimés avec succès.',
+    'total_links' => 'Total Liens',
+    'links_shortened' => 'Liens Raccourcis',
+    'sort_by_links' => 'Trier par : Liens',
+    'user_links' => 'Liens Courts de l\'utilisateur',
+    'no_user_links' => 'Cet utilisateur n\'a pas encore créé de liens.',
 ];
