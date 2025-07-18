@@ -40,4 +40,9 @@ return [
     'role_updated_successfully' => 'Role for :user_name updated successfully.',
     'cannot_delete_own_account' => 'You cannot delete your own account.',
     'user_deleted_successfully' => 'User :user_name and all their data deleted successfully.',
+    'total_links' => 'Total Links',
+    'links_shortened' => 'Links Shortened',
+    'sort_by_links' => 'Sort by: Links',
+    'user_links' => 'User\'s Short Links',
+    'no_user_links' => 'This user has not created any links yet.',
 ];
