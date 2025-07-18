@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Image;
+use App\Models\Link;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -22,14 +24,15 @@ class AdminController extends Controller
         $totalImages = Image::count();
         $totalStorageUsedBytes = Image::sum('size');
         $totalStorageUsedMB = $totalStorageUsedBytes / 1024 / 1024;
+        $totalLinks = Link::count();
 
         $systemStorageLimitBytes = (int)env('SYSTEM_STORAGE_LIMIT_GB', 1024) * 1024 * 1024 * 1024;
         $systemStoragePercentage = ($systemStorageLimitBytes > 0) ? ($totalStorageUsedBytes / $systemStorageLimitBytes) * 100 : 0;
         $systemStoragePercentage = min(100, $systemStoragePercentage);
 
-
         $users = User::withCount('images')
                      ->withSum('images', 'size')
+                     ->withCount('links')
                      ->orderBy('created_at', 'desc')
                      ->paginate(15);
 
@@ -48,15 +51,17 @@ class AdminController extends Controller
             'totalStorageUsedMB',
             'systemStorageLimitBytes',
             'systemStoragePercentage',
-            'users'
+            'users',
+            'totalLinks'
         ));
     }
 
     public function showUser(User $user)
     {
-        $user->loadCount('images')->loadSum('images', 'size');
+        $user->loadCount('images')->loadSum('images', 'size')->loadCount('links');
 
-        $userImages = $user->images()->latest()->paginate(10);
+        $userImages = $user->images()->latest()->paginate(8, ['*'], 'images_page')->withQueryString();
+        $userLinks = $user->links()->latest()->paginate(1, ['*'], 'links_page')->withQueryString();
 
         $avatarUrl = asset('img/default-avatar.png');
         if ($user->discord_id && $user->avatar) {
@@ -64,7 +69,7 @@ class AdminController extends Controller
         }
         $user->avatar_url = $avatarUrl;
 
-        return view('admin.user_insights', compact('user', 'userImages'));
+        return view('admin.user_insights', compact('user', 'userImages', 'userLinks'));
     }
 
     public function updateRole(Request $request, User $user)
@@ -93,10 +98,11 @@ class AdminController extends Controller
 		    if (Storage::disk('public')->exists($image->filename)) {
 		        Storage::disk('public')->delete($image->filename);
 		    }
-			
-		    $image->delete(); // Delete record after file
+		    $image->delete();
 		}
 		
+        $user->links()->delete();
+
         $user->delete();
 
         return Redirect::route('admin.dashboard')->with('success', __('admin.user_deleted_successfully', ['user_name' => $user->name]));
