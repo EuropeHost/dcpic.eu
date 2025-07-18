@@ -40,4 +40,9 @@ return [
     'role_updated_successfully' => 'Rolle für :user_name erfolgreich aktualisiert.',
     'cannot_delete_own_account' => 'Sie können Ihr eigenes Konto nicht löschen.',
     'user_deleted_successfully' => 'Nutzer :user_name und alle seine Daten erfolgreich gelöscht.',
+    'total_links' => 'Gesamtzahl der Links',
+    'links_shortened' => 'Gekürzte Links',
+    'sort_by_links' => 'Sortieren nach: Links',
+    'user_links' => 'Kurzlinks des Nutzers',
+    'no_user_links' => 'Dieser Nutzer hat noch keine Links erstellt.',
 ];
