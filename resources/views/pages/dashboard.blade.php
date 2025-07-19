@@ -138,7 +138,7 @@
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <a href="{{ route('links.show', $link->slug) }}" target="_blank" class="text-sky-600 hover:underline">
-                                        {{ env('APP_URL') }}/l/{{ $link->slug }}
+										{{ route('links.show', $link->slug) }}
                                     </a>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-500 truncate" title="{{ $link->original_url }}">
