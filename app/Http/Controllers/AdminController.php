@@ -61,7 +61,8 @@ class AdminController extends Controller
         $user->loadCount('images')->loadSum('images', 'size')->loadCount('links');
 
         $userImages = $user->images()->latest()->paginate(8, ['*'], 'images_page')->withQueryString();
-        $userLinks = $user->links()->latest()->paginate(1, ['*'], 'links_page')->withQueryString();
+
+        $userLinks = $user->links()->withCount('views')->latest()->paginate(10, ['*'], 'links_page')->withQueryString();
 
         $avatarUrl = asset('img/default-avatar.png');
         if ($user->discord_id && $user->avatar) {
