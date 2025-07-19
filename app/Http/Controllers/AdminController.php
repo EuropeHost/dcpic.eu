@@ -56,22 +56,22 @@ class AdminController extends Controller
         ));
     }
 
-    public function showUser(User $user)
-    {
-        $user->loadCount('images')->loadSum('images', 'size')->loadCount('links');
-
-        $userImages = $user->images()->latest()->paginate(8, ['*'], 'images_page')->withQueryString();
-
-        $userLinks = $user->links()->withCount('views')->latest()->paginate(10, ['*'], 'links_page')->withQueryString();
-
-        $avatarUrl = asset('img/default-avatar.png');
-        if ($user->discord_id && $user->avatar) {
-            $avatarUrl = "https://cdn.discordapp.com/avatars/{$user->discord_id}/{$user->avatar}.png";
-        }
-        $user->avatar_url = $avatarUrl;
-
-        return view('admin.user_insights', compact('user', 'userImages', 'userLinks'));
-    }
+	public function showUser(User $user)
+	{
+	    $user->loadCount(['images', 'links'])->loadSum('images', 'size');
+	
+	    $userImages = $user->images()->latest()->paginate(8, ['*'], 'images_page')->withQueryString();
+	
+	    $userLinks = $user->links()->withCount('views')->latest()->paginate(10, ['*'], 'links_page')->withQueryString();
+	
+	    $user->avatar_url = $user->discord_id && $user->avatar
+	        ? "https://cdn.discordapp.com/avatars/{$user->discord_id}/{$user->avatar}.png"
+	        : asset('img/default-avatar.png');
+	
+	    $totalUserLinkViews = $user->links()->withCount('views')->get()->sum('views_count');
+	
+	    return view('admin.user_insights', compact('user', 'userImages', 'userLinks', 'totalUserLinkViews'));
+	}
 
     public function updateRole(Request $request, User $user)
     {
