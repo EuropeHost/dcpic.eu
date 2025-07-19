@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Link;
+use App\Models\LinkView;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class LinkController extends Controller
 {
     public function show(Link $link)
     {
-        $link->increment('visits'); // Increment visit count
+        LinkView::create([
+            'link_id' => $link->id,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->header('User-Agent'),
+            'viewer_user_id' => Auth::id(),
+        ]);
+
         return Redirect::to($link->original_url);
     }
 
@@ -19,13 +27,13 @@ class LinkController extends Controller
     {
         $request->validate([
             'original_url' => 'required|url|max:2048',
-            'custom_slug' => ['nullable', 'string', 'min:5', 'max:7', Rule::unique('links', 'slug')], //optional
+            'custom_slug' => ['nullable', 'string', 'min:5', 'max:7', Rule::unique('links', 'slug')],
         ]);
 
         $slug = $request->custom_slug ?: Link::generateUniqueSlug();
 
         $link = Link::create([
-            'user_id' => auth()->check() ? auth()->id() : null,
+            'user_id' => Auth::check() ? Auth::id() : null,
             'original_url' => $request->original_url,
             'slug' => $slug,
         ]);
@@ -35,13 +43,13 @@ class LinkController extends Controller
 
     public function myLinks()
     {
-        $links = auth()->user()->links()->latest()->paginate(10);
+        $links = auth()->user()->links()->withCount('views')->latest()->paginate(10);
         return view('links.my', compact('links'));
     }
 
     public function destroy(Link $link)
     {
-        if (auth()->id() !== $link->user_id && auth()->user()->role !== 'admin') {
+        if (Auth::id() !== $link->user_id && Auth::user()->role !== 'admin') { // Changed Auth::user()->role from Auth::user()->id
             abort(403);
         }
 
