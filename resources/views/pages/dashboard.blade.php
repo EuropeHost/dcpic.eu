@@ -72,7 +72,6 @@
         </form>
     </div>
 
-    {{-- Display last up to 3 uploads --}}
     @if ($latestImages->isNotEmpty())
         <div class="mb-6">
             <h3 class="text-md font-semibold mb-2">{{ __('content.latest_uploads') }}</h3>
@@ -123,7 +122,7 @@
 
     @if ($latestLinks->isNotEmpty())
         <div class="mb-6">
-            <h3 class="text-md font-semibold mb-2">{{ __('links.latest_short_links') }}</h3> {{-- New lang key --}}
+            <h3 class="text-md font-semibold mb-2">{{ __('links.latest_short_links') }}</h3>
             <div class="overflow-x-auto bg-white border rounded shadow">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -145,7 +144,7 @@
                                 <td class="px-6 py-4 text-sm text-gray-500 truncate" title="{{ $link->original_url }}">
                                     {{ $link->original_url }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($link->visits) }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($link->views_count) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <button onclick="navigator.clipboard.writeText('{{ route('links.show', $link->slug) }}')" class="text-blue-500 hover:text-blue-700 mr-3">{{ __('links.copy') }}</button>
                                     <form action="{{ route('links.destroy', $link) }}" method="POST" class="inline">
@@ -164,7 +163,7 @@
         <div class="mb-6">
             <h3 class="text-md font-semibold mb-2">{{ __('links.no_links_yet') }}</h3>
             <div class="bg-white border rounded shadow p-4">
-                <p>{{ __('links.create_first_link') }}</p> {{-- New lang key --}}
+                <p>{{ __('links.create_first_link') }}</p>
             </div>
         </div>
     @endif
@@ -175,7 +174,15 @@
             {{ __('content.total_images_uploaded') }}:
             {{ auth()->user()->images()->count() }}
         </p>
+        <p class="text-gray-700 mb-2">
+            {{ __('content.total_links_shortened') }}:
+            {{ auth()->user()->links()->count() }}
+        </p>
+        <p class="text-gray-700 mb-2">
+            {{ number_format($totalUserLinkViews) }}
+        </p>
         <p class="text-gray-700">
+            {{ __('content.account_created') }}:
             {{ auth()->user()->created_at->format('M d, Y') }}
         </p>
     </div>
