@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <div class="bg-gray-50 rounded-lg p-5 border">
                 <p class="text-lg font-semibold text-gray-700">{{ __('admin.images_uploaded') }}</p>
                 <p class="text-3xl font-bold text-sky-600 mt-1">{{ number_format($user->images_count) }}</p>
@@ -46,6 +46,10 @@
             <div class="bg-gray-50 rounded-lg p-5 border">
                 <p class="text-lg font-semibold text-gray-700">{{ __('admin.links_shortened') }}</p>
                 <p class="text-3xl font-bold text-sky-600 mt-1">{{ number_format($user->links_count) }}</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-5 border">
+                <p class="text-lg font-semibold text-gray-700">{{ __('admin.link_views') }}</p>
+                <p class="text-3xl font-bold text-sky-600 mt-1">{{ number_format($totalUserLinkViews) }}</p>
             </div>
         </div>
 
