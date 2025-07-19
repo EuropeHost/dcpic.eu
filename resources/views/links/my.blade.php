@@ -46,10 +46,10 @@
                                         {{ env('APP_URL') }}/l/{{ $link->slug }}
                                     </a>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 truncate" title="{{ $link->original_url }}">
+                                <td class="px-6 py-4 text-sm text-gray-500 truncate" title="{{ $link->original_url }}">
                                     {{ $link->original_url }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($link->visits) }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ number_format($link->views_count) }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <button onclick="navigator.clipboard.writeText('{{ route('links.show', $link->slug) }}')" class="text-blue-500 hover:text-blue-700 mr-3">{{ __('links.copy') }}</button>
                                     <form action="{{ route('links.destroy', $link) }}" method="POST" class="inline">
