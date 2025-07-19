@@ -87,8 +87,15 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        $latestImages = auth()->user()->images()->latest()->take(3)->get();
-        $latestLinks = auth()->user()->links()->latest()->take(5)->get();
-        return view('pages.dashboard', compact(['latestImages', 'latestLinks']));
+        $user = auth()->user();
+
+        $userLinksWithViewsCount = $user->links()->withCount('views')->get();
+
+        $totalUserLinkViews = $userLinksWithViewsCount->sum('views_count');
+
+        $latestImages = $user->images()->latest()->take(3)->get();
+        $latestLinks = $userLinksWithViewsCount->sortByDesc('created_at')->take(5);
+        
+        return view('pages.dashboard', compact(['latestImages', 'latestLinks', 'totalUserLinkViews']));
     }
 }
