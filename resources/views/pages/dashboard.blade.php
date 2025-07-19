@@ -179,6 +179,7 @@
             {{ auth()->user()->links()->count() }}
         </p>
         <p class="text-gray-700 mb-2">
+            {{ __('content.total_link_views') }}
             {{ number_format($totalUserLinkViews) }}
         </p>
         <p class="text-gray-700">
