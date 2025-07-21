@@ -56,4 +56,6 @@ return [
     'total_links_created' => 'Total Links Shortened',
     'top_link_users' => 'Top Users by Links',
     'links' => 'links',
+    'total_links_shortened' => 'Total Links Shortened',
+    'total_link_views' => 'Total Link Views',
 ];
