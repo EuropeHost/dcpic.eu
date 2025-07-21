@@ -56,4 +56,6 @@ return [
     'total_links_created' => 'Insgesamt gekürzte Links',
     'top_link_users' => 'Top Nutzer nach Links',
     'links' => 'Links'
+    'total_links_shortened' => 'Insgesamt gekürzte Links',
+    'total_link_views' => 'Gesamtzahl der Link-Aufrufe',
 ];
