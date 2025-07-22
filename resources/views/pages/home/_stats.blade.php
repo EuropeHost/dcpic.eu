@@ -1,7 +1,7 @@
 <section
     id="stats"
-    class="home mx-auto flex min-h-screen w-full max-w-7xl flex-col
-           items-center justify-center px-4 py-24"
+    class="home mx-auto flex w-full max-w-7xl flex-col
+           items-center justify-center px-4 py-12"
 >
     <div class="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
         <div class="stat-card flex transform flex-col justify-between rounded-xl
