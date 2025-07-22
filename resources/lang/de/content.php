@@ -58,4 +58,9 @@ return [
     'links' => 'Links'
     'total_links_shortened' => 'Insgesamt gekürzte Links',
     'total_link_views' => 'Gesamtzahl der Link-Aufrufe',
+    'stats_last_30_days' => 'Letzte 30 Tage',
+    'stats_last_24_hours' => 'Letzte 24 Stunden',
+    'link_views' => 'Link-Aufrufe',
+    'data_for_period' => 'Daten für diesen Zeitraum.',
+    'no_top_users_found' => 'Noch keine Top-Nutzer gefunden.',
 ];
