@@ -1,314 +1,70 @@
 @extends('layouts.app')
 
 @section('content')
-    <section
-        id="hero"
-        x-data="{ show: false }"
-        x-init="
-            const nav = document.querySelector('nav');
-            const fit = () => {
-                $el.style.minHeight =
-                    'calc(100vh - ' + (nav ? nav.offsetHeight : 0) + 'px)';
-            };
-            fit();
-            window.addEventListener('resize', fit);
-            window.addEventListener('preloader:done', () => (show = true));
-        "
-        class="relative flex flex-col items-center justify-center overflow-hidden
-               bg-gray-900"
-    >
-        <canvas id="stars" class="absolute inset-0"></canvas>
+    @include('pages.home._hero')
 
-        <span
-            class="pointer-events-none absolute -left-32 -top-40 h-96 w-96
-                   animate-pulse-fast rounded-full bg-indigo-600 opacity-30
-                   blur-3xl"
-        ></span>
-        <span
-            class="pointer-events-none absolute -right-24 top-1/3 h-80 w-80
-                   animate-bounce-slow rounded-full bg-sky-500 opacity-40
-                   mix-blend-lighten blur-2xl"
-        ></span>
+    @include('pages.home._stats')
 
-        <div class="relative z-10 px-6 text-center">
-            <h1
-                x-show="show"
-                x-transition.duration.800ms
-                class="text-5xl font-extrabold tracking-tight text-white
-                       drop-shadow-xl sm:text-6xl md:text-7xl"
-            >
-                {!! __('content.home_title') !!}
-            </h1>
-
-            <p
-                x-show="show"
-                x-transition.delay.200ms.duration.800ms
-                class="mx-auto mt-6 max-w-3xl text-xl text-white/90 sm:text-2xl
-                       md:text-3xl"
-            >
-                {!! __('content.home_subtitle') !!}
-            </p>
-
-            @guest
-                <a
-                    x-show="show"
-                    x-transition.delay.400ms.duration.800ms
-                    href="{{ route('login') }}"
-                    class="discord-login-btn group relative mt-12 inline-flex
-                           items-center justify-center gap-3 rounded-xl px-8
-                           py-4 text-base font-semibold text-white sm:text-lg"
-                >
-                    <span
-                        class="absolute inset-0 rounded-xl bg-gradient-to-r
-                               from-white/20 to-white/5 opacity-0 transition
-                               group-hover:opacity-100"
-                    ></span>
-                    <i class="bi bi-discord text-2xl"></i>
-                    {{ __('content.login_with_discord') }}
-                </a>
-            @else
-                <a
-                    x-show="show"
-                    x-transition.delay.400ms.duration.800ms
-                    href="{{ route('dashboard') }}"
-                    class="discord-login-btn group relative mt-12 inline-flex
-                           items-center justify-center gap-3 rounded-xl px-8
-                           py-4 text-base font-semibold text-white sm:text-lg"
-                >
-                    <span
-                        class="absolute inset-0 rounded-xl bg-gradient-to-r
-                               from-white/20 to-white/5 opacity-0 transition
-                               group-hover:opacity-100"
-                    ></span>
-                    <i class="bi bi-speedometer text-2xl"></i>
-                    {{ __('content.dashboard') }}
-                </a>
-            @endguest
-        </div>
-
-        <div
-            x-show="show"
-            x-transition.delay.600ms.duration.800ms
-            class="relative z-10 mt-16 grid grid-cols-1 gap-6 px-6 sm:grid-cols-2"
-        >
-            <div class="feature-card">
-                <i class="bi bi-lightning-fill text-3xl text-yellow-400"></i>
-                <div>
-                    <p class="font-bold">{{ __('features.fast_title') }}</p>
-                    <p class="text-sm opacity-80">
-                        {{ __('features.fast_desc') }}
-                    </p>
-                </div>
-            </div>
-            <div class="feature-card sm:col-span-2 lg:col-span-1">
-                <i class="bi bi-discord text-3xl text-indigo-400"></i>
-                <div>
-                    <p class="font-bold">
-                        {{ __('features.discord_title') }}
-                    </p>
-                    <p class="text-sm opacity-80">
-                        {{ __('features.discord_desc') }}
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2">
-            <a href="#stats" class="scroll-down-btn">
-                <i class="bi bi-chevron-double-down text-3xl"></i>
-            </a>
-        </div>
-    </section>
-
-	<section
-	    id="stats"
-	    class="home mx-auto flex min-h-screen w-full max-w-7xl flex-col
-	           items-center justify-center px-4 py-24"
-	>
-	    <div class="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-	        <div class="stat-card flex transform flex-col justify-between rounded-xl
-	                    border bg-white p-8 shadow-lg transition duration-300
-	                    hover:scale-105 hover:shadow-xl">
-	            <div class="text-center">
-	                <h2 class="mb-4 text-2xl font-bold text-gray-800">
-	                    {{ __('content.storage_overview') }}
-	                </h2>
-	                <div class="mb-2 h-4 w-full rounded-full bg-gray-200">
-	                    <div
-	                        class="h-4 rounded-full bg-sky-600 transition-all"
-	                        style="width: {{ $storagePercentage }}%"
-	                    ></div>
-	                </div>
-	                <p class="mb-1 text-lg font-semibold text-gray-700">
-	                    <span class="animated-count" data-start="0"
-	                        data-end="{{ number_format($totalUsed / 1048576, 2, '.', '') }}"
-	                        data-decimals="2"></span>
-	                    MB /
-	                    <span class="animated-count" data-start="0"
-	                        data-end="{{ number_format($totalLimit / 1073741824, 2, '.', '') }}"
-	                        data-decimals="2"></span>
-	                    GiB
-	                </p>
-	                <p class="text-md text-gray-600">
-	                    (<span class="animated-count" data-start="0"
-	                        data-end="{{ number_format($storagePercentage, 1, '.', '') }}"
-	                        data-decimals="1"></span>
-	                    % {{ __('content.used') }})
-	                </p>
-	            </div>
-	            <div class="mt-6 border-t border-gray-200 pt-4 text-center">
-	                <p class="text-md text-gray-700">
-	                    <strong>{{ __('content.average_per_user') }}:</strong>
-	                    <span class="animated-count" data-start="0"
-	                        data-end="{{ number_format($avgPerUser / 1048576, 2, '.', '') }}"
-	                        data-decimals="2"></span>
-	                    MB
-	                </p>
-	            </div>
-	        </div>
-	
-	        <div class="stat-card flex transform flex-col justify-between rounded-xl
-	                    border bg-white p-8 shadow-lg transition duration-300
-	                    hover:scale-105 hover:shadow-xl">
-	            <div class="text-center">
-	                <h2 class="mb-4 text-2xl font-bold text-gray-800">
-	                    {{ __('content.general_stats') }}
-	                </h2>
-	                <p class="mb-2 text-lg text-gray-700">
-	                    <i class="bi bi-person-fill mr-2 text-sky-600"></i>
-	                    <strong>{{ __('content.total_users') }}:</strong>
-	                    <span class="animated-count" data-start="0"
-	                        data-end="{{ number_format($totalUsers, 0, '.', '') }}"
-	                        data-decimals="0"></span>
-	                </p>
-	                <p class="mb-2 text-lg text-gray-700">
-	                    <i class="bi bi-image-fill mr-2 text-sky-600"></i>
-	                    <strong>{{ __('content.total_images_uploaded') }}:</strong>
-	                    <span class="animated-count" data-start="0"
-	                        data-end="{{ number_format($totalImages, 0, '.', '') }}"
-	                        data-decimals="0"></span>
-	                </p>
-	                <p class="text-lg text-gray-700">
-	                    <i class="bi bi-link-45deg mr-2 text-sky-600"></i>
-	                    <strong>{{ __('content.total_links_created') }}:</strong>
-	                    <span class="animated-count" data-start="0"
-	                        data-end="{{ number_format($totalLinks, 0, '.', '') }}"
-	                        data-decimals="0"></span>
-	                </p>
-	            </div>
-	            <div class="mt-6 border-t border-gray-200 pt-4 text-center">
-	                <p class="text-sm italic text-gray-500">
-	                    {{ __('content.stats_update_info') }}
-	                </p>
-	            </div>
-	        </div>
-	
-	        <div class="stat-card transform rounded-xl border bg-white p-8 shadow-lg
-	                    transition duration-300 hover:scale-105 hover:shadow-xl
-	                    md:col-span-2 lg:col-span-1">
-	            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800">
-	                {{ __('content.top_storage_users') }}
-	            </h2>
-	            @if ($topStorageUsers->isNotEmpty())
-	                <ul class="space-y-3">
-	                    @foreach ($topStorageUsers as $index => $user)
-	                        <li class="user-item flex items-center space-x-3 rounded-lg bg-gray-50 p-2 transition
-	                                   duration-200 hover:scale-[1.02] hover:bg-gray-100 hover:shadow-sm">
-	                            <div class="rank flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full
-	                                        bg-sky-100 text-lg font-bold text-sky-600">
-	                                {{ $index + 1 }}
-	                            </div>
-	                            <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}"
-	                                class="avatar h-10 w-10 rounded-full border-2 border-sky-400 object-cover" />
-	                            <div class="min-w-0 flex-grow text-left">
-	                                <p class="truncate font-semibold text-gray-800">{{ $user->name }}</p>
-	                                <p class="text-sm text-gray-600">
-	                                    <span class="animated-count" data-start="0"
-	                                        data-end="{{ $user->storage_used_mb }}"
-	                                        data-decimals="2"></span> MB
-	                                </p>
-	                            </div>
-	                        </li>
-	                    @endforeach
-	                </ul>
-	            @else
-	                <p class="text-center text-gray-600">
-	                    {{ __('content.no_top_storage_users') }}
-	                </p>
-	            @endif
-	        </div>
-	    </div>
-	
-	    <div class="stat-card mx-auto mt-12 w-full transform rounded-xl border bg-white p-8 shadow-lg transition duration-300">
-	        <h2 class="mb-4 text-center text-2xl font-bold text-gray-800">
-	            {{ __('content.top_image_users') }}
-	        </h2>
-	        @if ($topImageUsers->isNotEmpty())
-	            <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-	                @foreach ($topImageUsers as $index => $user)
-	                    <li class="user-item flex items-center space-x-3 rounded-lg bg-gray-50 p-2 transition
-	                               duration-200 hover:scale-[1.02] hover:bg-gray-100 hover:shadow-sm">
-	                        <div class="rank flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full
-	                                    bg-sky-100 text-lg font-bold text-sky-600">
-	                            {{ $index + 1 }}
-	                        </div>
-	                        <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}"
-	                            class="h-10 w-10 rounded-full border-2 border-sky-400 object-cover" />
-	                        <div class="min-w-0 flex-grow text-left">
-	                            <p class="truncate font-semibold text-gray-800">{{ $user->name }}</p>
-	                            <p class="text-sm text-gray-600">
-	                                <span class="animated-count" data-start="0"
-	                                    data-end="{{ $user->image_count }}"
-	                                    data-decimals="0"></span> {{ __('content.images') }}
-	                            </p>
-	                        </div>
-	                    </li>
-	                @endforeach
-	            </ul>
-	        @else
-	            <p class="text-center text-gray-600">
-	                {{ __('content.no_top_image_users') }}
-	            </p>
-	        @endif
-	    </div>
-	
-	    <div class="stat-card mx-auto mt-12 w-full transform rounded-xl border bg-white p-8 shadow-lg transition duration-300">
-	        <h2 class="mb-4 text-center text-2xl font-bold text-gray-800">
-	            {{ __('content.top_link_users') }}
-	        </h2>
-	        @if ($topLinkUsers->isNotEmpty())
-	            <ul class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-	                @foreach ($topLinkUsers as $index => $user)
-	                    <li class="user-item flex items-center space-x-3 rounded-lg bg-gray-50 p-2 transition
-	                               duration-200 hover:scale-[1.02] hover:bg-gray-100 hover:shadow-sm">
-	                        <div class="rank flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full
-	                                    bg-sky-100 text-lg font-bold text-sky-600">
-	                            {{ $index + 1 }}
-	                        </div>
-	                        <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}"
-	                            class="h-10 w-10 rounded-full border-2 border-sky-400 object-cover" />
-	                        <div class="min-w-0 flex-grow text-left">
-	                            <p class="truncate font-semibold text-gray-800">{{ $user->name }}</p>
-	                            <p class="text-sm text-gray-600">
-	                                <span class="animated-count" data-start="0"
-	                                    data-end="{{ $user->link_count }}"
-	                                    data-decimals="0"></span> {{ __('content.links') }}
-	                            </p>
-	                        </div>
-	                    </li>
-	                @endforeach
-	            </ul>
-	        @else
-	            <p class="text-center text-gray-600">
-	                {{ __('content.no_top_link_users') }}
-	            </p>
-	        @endif
-	    </div>
-	</section>
+    @include('pages.home._leaderboards')
 
     @push('scripts')
+        <style>
+            html { scroll-behavior: smooth; }
+
+            @keyframes pulseFast {
+                0%,100% { transform: scale(1); opacity: .3 }
+                50%     { transform: scale(1.15); opacity: .6 }
+            }
+            @keyframes bounceSlow {
+                0%,100% { transform: translateY(0) }
+                50%     { transform: translateY(-12px) }
+            }
+            @keyframes slideUp {
+                from { opacity: 0; transform: translateY(40px) }
+                to   { opacity: 1; transform: translateY(0)   }
+            }
+            @keyframes float {
+                0%,100% { transform: translateY(0) }
+                50%     { transform: translateY(-6px) }
+            }
+
+            .animate-pulse-fast  { animation: pulseFast 4s infinite }
+            .animate-bounce-slow { animation: bounceSlow 6s infinite }
+
+            .scroll-down-btn {
+                display: flex; align-items: center; justify-content: center;
+                width: 4rem; height: 4rem; border-radius: 9999px; color: #fff;
+                background: linear-gradient(135deg,#5865f2,#7289da);
+                box-shadow: 0 4px 18px rgba(88,101,242,.45);
+                transition: transform .3s, box-shadow .3s;
+                animation: bounceSlow 4s infinite;
+            }
+            .scroll-down-btn:hover {
+                transform: translateY(-4px) scale(1.05);
+                box-shadow: 0 8px 24px rgba(88,101,242,.65);
+            }
+
+            .feature-card {
+                display: flex; align-items: center; gap: 1rem;
+                background: rgba(31,41,55,.4); padding: 1rem;
+                border-radius: .5rem; backdrop-filter: blur(8px);
+                color: #fff; opacity: 0; transform: translateY(40px);
+                animation: slideUp .8s forwards, float 6s 1s infinite ease-in-out;
+            }
+            .feature-card:nth-child(1) { animation-delay: .1s,1.1s; }
+            .feature-card:nth-child(2) { animation-delay: .25s,1.25s; }
+            .feature-card:nth-child(3) { animation-delay: .4s,1.4s; }
+            .feature-card i { transition: transform .3s; }
+            .feature-card:hover i { transform: scale(1.15) rotate(6deg); }
+
+            .stat-card {
+                opacity: 0; transform: translateY(40px);
+                animation: slideUp .8s forwards;
+            }
+        </style>
+
         <script>
-            const animateCount = (el, dur = 2500) => {
+            const animateCount = (el, dur = 4000) => {
                 const s = +el.dataset.start,
                     e = +el.dataset.end,
                     dec = +el.dataset.decimals;
@@ -376,43 +132,39 @@
 
             const setupStatAnimations = () => {
                 const statsSection = document.getElementById('stats');
-                if (!statsSection) return;
+                const leaderboardsSection = document.getElementById('leaderboards');
 
-                const observer = new IntersectionObserver(
-                    (entries, observer) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                document
-                                    .querySelectorAll('.animated-count')
-                                    .forEach((el) => animateCount(el));
-
-                                document
-                                    .querySelectorAll('.stat-card')
-                                    .forEach((card, index) => {
-                                        card.style.animationDelay = `${0.1 * index}s`;
-                                        card.classList.add(
-                                            'animate-slide-up-custom'
-                                        );
-                                    });
-
-                                document
-                                    .querySelectorAll('.user-item')
-                                    .forEach((item, index) => {
-                                        item.style.animationDelay = `${0.05 * index}s`;
-                                        item.classList.add(
-                                            'animate-slide-up-custom'
-                                        );
-                                    });
-
-                                observer.unobserve(statsSection);
+                const observerCallback = (entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            if (entry.target.id === 'stats') {
+                                document.querySelectorAll('#stats .animated-count').forEach((el) => animateCount(el));
+                                document.querySelectorAll('#stats .stat-card').forEach((card, index) => {
+                                    card.style.animationDelay = `${0.1 * index}s`;
+                                    card.classList.add(
+                                        'animate-slide-up-custom'
+                                    );
+                                });
+                            } else if (entry.target.id === 'leaderboards') {
+                                document.querySelectorAll('#leaderboards .animated-count').forEach((el) => animateCount(el));
+                                document.querySelectorAll('#leaderboards .user-item').forEach((item, index) => {
+                                    item.style.animationDelay = `${0.05 * index}s`;
+                                    item.classList.add(
+                                        'animate-slide-up-custom'
+                                    );
+                                });
                             }
-                        });
-                    },
-                    { threshold: 0.1 }
-                );
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                };
 
-                observer.observe(statsSection);
+                const observer = new IntersectionObserver(observerCallback, { threshold: 0.1 });
+
+                if (statsSection) observer.observe(statsSection);
+                if (leaderboardsSection) observer.observe(leaderboardsSection);
             };
+
 
             window.addEventListener('preloader:done', () => {
                 stars();
