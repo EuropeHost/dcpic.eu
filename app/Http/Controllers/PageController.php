@@ -70,7 +70,7 @@ class PageController extends Controller
         // --- Top Users by Link Count ---
         $topLinkUsers = User::withCount('links')
             ->orderByDesc('links_count')
-            ->take(4)
+            ->take(2)
             ->get()
             ->map(function ($user) {
                 $avatarUrl = asset('img/default-avatar.png');
