@@ -1,7 +1,7 @@
 <section
     id="leaderboards"
     class="home mx-auto flex min-h-screen w-full max-w-7xl flex-col
-           items-center justify-center px-4 py-24"
+           items-center justify-center px-4"
 >
     {{-- Top Storage Users --}}
     @include('components.home_stat_users_container', [
