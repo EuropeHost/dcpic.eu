@@ -58,4 +58,9 @@ return [
     'links' => 'liens',
     'total_links_shortened' => 'Total Liens Raccourcis',
     'total_link_views' => 'Total Vues de Liens',
+    'stats_last_30_days' => 'Derniers 30 Jours',
+    'stats_last_24_hours' => 'Dernières 24 Heures',
+    'link_views' => 'Vues de Liens',
+    'data_for_period' => 'Données pour cette période.',
+    'no_top_users_found' => 'Aucun utilisateur en tête trouvé pour le moment.',
 ];
