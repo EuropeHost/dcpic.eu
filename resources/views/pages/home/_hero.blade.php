@@ -97,7 +97,7 @@
                 </p>
             </div>
         </div>
-        <div class="feature-card sm:col-span-2 lg:col-span-1">
+        <div class="feature-card">
             <i class="bi bi-discord text-3xl text-indigo-400"></i>
             <div>
                 <p class="font-bold">
