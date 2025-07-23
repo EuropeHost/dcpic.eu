@@ -67,9 +67,11 @@ class ImageController extends Controller
 
     public function show(Image $image)
     {
-        if (!$image->is_public && (auth()->guest() || auth()->id() !== $image->user_id)) {
+        /*
+		if (!$image->is_public && (auth()->guest() || auth()->id() !== $image->user_id)) {
             abort(403);
         }
+		*/ //Just if you want the plattform as Users "Private Image Cloud"
 
         $path = Storage::disk('public')->path('images/' . $image->filename);
 
