@@ -60,42 +60,4 @@ class StatsController extends Controller
             ]
         ]);
     }
-
-    /**
-     * Get authenticated user's statistics.
-     * Requires API token authentication (e.g., Sanctum).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function userStats(Request $request)
-    {
-        $user = Auth::user();
-
-        $user->loadCount(['images', 'links']);
-
-        $userLinksWithViewsCount = $user->links()->withCount('views')->get();
-        $totalUserLinkViews = $userLinksWithViewsCount->sum('views_count');
-
-        $storageUsedMB = round($user->images()->sum('size') / 1024 / 1024, 2);
-        $storageLimitMB = $user->storage_limit_mb;
-        $storagePercentage = ($storageLimitMB > 0) ? ($storageUsedMB / $storageLimitMB) * 100 : 0;
-        $storagePercentage = min(100, $storagePercentage);
-
-        return response()->json([
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'discord_id' => $user->discord_id,
-                'role' => $user->role,
-                'account_created_at' => $user->created_at->toDateTimeString(),
-                'images_uploaded' => $user->images_count,
-                'links_created' => $user->links_count,
-                'total_link_views' => $totalUserLinkViews,
-                'storage_used_mb' => $storageUsedMB,
-                'storage_limit_mb' => $storageLimitMB,
-                'storage_percentage' => round($storagePercentage, 1),
-            ]
-        ]);
-    }
 }
