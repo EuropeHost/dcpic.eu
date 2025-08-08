@@ -9,8 +9,8 @@
         <title>{{ config('app.name', 'dcpic.eu') }}</title>
 
         <!-- TailwindCSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
-
+        <!--script src="https://cdn.tailwindcss.com"></script-->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Bootstrap Icons -->
         <link
             rel="stylesheet"
