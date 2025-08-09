@@ -31,13 +31,13 @@
                     {{ __('Only .mp4 videos and images (JPG, PNG, GIF, WebP) are allowed. Max size: :max MB.', ['max' => env('MAX_FILE_SIZE', 50)]) }}
                 </small>
 
-                <select name="is_public" class="border-0 rounded px-3 py-2 text-sm flex-shrink-0">
+                <select name="is_public" class="border-1 border-gray-300 hover:border-gray-400 duration-255 rounded px-3 py-2 text-sm flex-shrink-0">
                     <option value="0">{{ __('content.private') }}</option>
                     <option value="1">{{ __('content.public') }}</option>
                 </select>
 
                 <button type="submit"
-                    class="bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 transition text-sm flex-shrink-0">
+                    class="bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 duration-255 transition text-sm flex-shrink-0">
                     <i class="bi bi-upload"></i> {{ __('content.upload') }}
                 </button>
             </div>
@@ -65,7 +65,7 @@
                     @error('custom_slug')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
                 <button type="submit"
-                    class="bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 transition text-sm flex-shrink-0">
+                    class="bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 duration-255 transition text-sm flex-shrink-0">
                     <i class="bi bi-link-45deg"></i> {{ __('links.shorten') }}
                 </button>
             </div>
