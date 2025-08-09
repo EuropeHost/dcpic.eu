@@ -5,7 +5,7 @@
 >
     <div class="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
         <div class="stat-card flex transform flex-col justify-between rounded-xl
-                    border bg-white p-8 shadow-lg transition duration-300
+                    border-0 bg-white p-8 shadow-lg transition duration-300
                     hover:scale-105 hover:shadow-xl">
             <div class="text-center">
                 <h2 class="mb-4 text-2xl font-bold text-gray-800">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="stat-card flex transform flex-col justify-between rounded-xl
-                    border bg-white p-8 shadow-lg transition duration-300
+                    border-0 bg-white p-8 shadow-lg transition duration-300
                     hover:scale-105 hover:shadow-xl">
             <div class="text-center">
                 <h2 class="mb-4 text-2xl font-bold text-gray-800">
@@ -82,7 +82,7 @@
         </div>
 
         <div class="stat-card flex transform flex-col justify-between rounded-xl
-                    border bg-white p-8 shadow-lg transition duration-300
+                    border-0 bg-white p-8 shadow-lg transition duration-300
                     hover:scale-105 hover:shadow-xl">
             <div class="text-center">
                 <h2 class="mb-4 text-2xl font-bold text-gray-800">
@@ -111,7 +111,7 @@
         </div>
 
         <div class="stat-card flex transform flex-col justify-between rounded-xl
-                    border bg-white p-8 shadow-lg transition duration-300
+                    border-0 bg-white p-8 shadow-lg transition duration-300
                     hover:scale-105 hover:shadow-xl">
             <div class="text-center">
                 <h2 class="mb-4 text-2xl font-bold text-gray-800">

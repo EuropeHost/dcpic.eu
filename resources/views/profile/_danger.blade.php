@@ -1,4 +1,4 @@
-<div class="bg-red-50 p-6 rounded-lg border border-red-200">
+<div class="bg-red-50 p-6 rounded-lg border-0 border-red-200">
     <p class="text-md text-red-700 mb-4">{{ __('profile.delete_account_warning_intro') }}</p>
 
     <button

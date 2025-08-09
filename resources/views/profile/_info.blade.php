@@ -1,4 +1,4 @@
-<div class="bg-gray-50 p-4 rounded-lg border flex flex-col sm:flex-row items-start sm:items-center">
+<div class="bg-gray-50 p-4 rounded-lg border-0 flex flex-col sm:flex-row items-start sm:items-center">
     <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-24 h-24 rounded-full object-cover border-4 border-sky-400 mr-6 mb-4 sm:mb-0">
     <div>
         <p class="text-lg font-semibold text-gray-900">{{ __('profile.username') }}: <span class="font-normal">{{ $user->name }}</span></p>
