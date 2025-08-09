@@ -18,12 +18,12 @@
         />
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="{{ asset('css/discord-login-btn.css') }}" />
+        {{--<link rel="stylesheet" href="{{ asset('css/discord-login-btn.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/preloader.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/scroll-down-btn.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/feature-card.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/stats.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/animations.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/animations.css') }}" />--}}
 
     </head>
 
