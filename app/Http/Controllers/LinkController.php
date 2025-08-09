@@ -27,7 +27,7 @@ class LinkController extends Controller
     {
         $request->validate([
             'original_url' => 'required|url|max:2048',
-            'custom_slug' => ['nullable', 'string', 'min:5', 'max:7', Rule::unique('links', 'slug')],
+            'custom_slug' => ['nullable', 'string', 'min:5', 'max:12', Rule::unique('links', 'slug')],
         ]);
 
         $slug = $request->custom_slug ?: Link::generateUniqueSlug();
