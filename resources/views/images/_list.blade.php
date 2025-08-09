@@ -8,7 +8,7 @@
 			@endphp
 
             <div x-data="{ showCopyModal: false, showDeleteModal: false, isOwner: {{ auth()->id() === $image->user_id ? 'true' : 'false' }} }"
-                 class="group relative border rounded-lg shadow-sm bg-white overflow-hidden flex flex-col justify-between transition-all duration-200 hover:shadow-md">
+                 class="group relative border-0 rounded-lg shadow-sm bg-white overflow-hidden flex flex-col justify-between transition-all duration-200 hover:shadow-md">
 
                 <div class="relative w-full aspect-video flex items-center justify-center bg-gray-100 rounded-t-lg">
                     @if(Str::startsWith($image->mime, 'video/'))
