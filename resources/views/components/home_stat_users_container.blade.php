@@ -1,6 +1,6 @@
 <div
-    class="stat-card mx-auto mt-12 w-full transform rounded-xl border
-           bg-white p-8 shadow-lg transition duration-300 hover:scale-105
+    class="stat-card mx-auto mt-12 w-full transform rounded-xl border-1 border-gray-200 hover:border-gray-300
+           bg-white p-8 shadow-lg transition duration-300 hover:scale-103
            {{ $col_span_lg ?? '' }}"
 >
     <h2 class="mb-4 text-center text-2xl font-bold text-gray-800">
@@ -25,7 +25,7 @@
         <ul class="grid {{ $gridClass }} gap-4">
             @foreach ($users_collection as $index => $user)
                 <li class="user-item flex items-center space-x-3 rounded-lg bg-gray-50 p-2 transition
-                           duration-200 hover:scale-[1.02] hover:bg-gray-100 hover:shadow-sm">
+                           duration-200 hover:scale-102 hover:bg-gray-100 hover:shadow-sm">
                     <div class="rank flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full
                                 bg-sky-100 text-lg font-bold text-sky-600">
                         {{ $index + 1 }}

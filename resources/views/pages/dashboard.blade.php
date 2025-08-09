@@ -77,7 +77,7 @@
             <h3 class="text-md font-semibold mb-2">{{ __('content.latest_uploads') }}</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($latestImages as $image)
-                    <div class="bg-white border-0 rounded shadow p-4 relative overflow-hidden">
+                    <div class="bg-white border-1 border-gray-200 rounded shadow p-4 relative overflow-hidden">
                         @if (Str::startsWith($image->mime, 'video/'))
                             <video controls class="max-w-full max-h-48 h-auto rounded mb-2 mx-auto">
                                 <source src="{{ route('vid.show.slug', $image) }}" type="{{ $image->mime }}">
@@ -114,7 +114,7 @@
     @else
         <div class="mb-6">
             <h3 class="text-md font-semibold mb-2">{{ __('content.no_uploads') }}</h3>
-            <div class="bg-white border-0 rounded shadow p-4">
+            <div class="bg-white border-1 border-gray-200 rounded shadow p-4">
                 <p>{{ __('content.upload_first') }}</p>
             </div>
         </div>
@@ -123,7 +123,7 @@
     @if ($latestLinks->isNotEmpty())
         <div class="mb-6">
             <h3 class="text-md font-semibold mb-2">{{ __('links.latest_short_links') }}</h3>
-            <div class="overflow-x-auto bg-white border-0 rounded shadow">
+            <div class="overflow-x-auto bg-white border-1 border-gray-200 rounded shadow">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
@@ -162,7 +162,7 @@
     @else
         <div class="mb-6">
             <h3 class="text-md font-semibold mb-2">{{ __('links.no_links_yet') }}</h3>
-            <div class="bg-white border-0 rounded shadow p-4">
+            <div class="bg-white border-1 border-gray-200 rounded shadow p-4">
                 <p>{{ __('links.create_first_link') }}</p>
             </div>
         </div>
